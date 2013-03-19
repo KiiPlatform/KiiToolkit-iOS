@@ -123,6 +123,8 @@
         // to show the outer glow, make sure we're not clipping
         self.clipsToBounds = FALSE;
         
+        _borderColor = [UIColor clearColor];
+        
         // align the text vertically in the middle
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         

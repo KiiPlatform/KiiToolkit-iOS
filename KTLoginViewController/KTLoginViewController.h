@@ -25,14 +25,14 @@
 /**
  This class is a ViewController which allows you to create a full user authentication experience with only 2 lines of code: initialization and showing the view controller:
  
-        KTLoginViewController *vc = [[KTLoginViewController alloc] init];
-        [self presentViewController:vc animated:TRUE completion:nil];
+    KTLoginViewController *vc = [[KTLoginViewController alloc] init];
+    [self presentViewController:vc animated:TRUE completion:nil];
 
  Included is: user authentication, user registration, and a forgotten password view. All the UI interactions, successes and failures are handled via the KiiToolkit classes. All views can be customized, including layout, graphics and text - so you can make the view your own without having to worry about the user logic.
  
  A good way to get the authenticated user is from your view controller which calls the presentViewController - in its viewDidAppear: method. You can access the user using:
  
-        KiiUser *user = [KiiUser currentUser];
+    KiiUser *user = [KiiUser currentUser];
 
  */
 @interface KTLoginViewController : UIViewController <UITextFieldDelegate> {

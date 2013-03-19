@@ -19,10 +19,20 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ The field types that can be shown to the user for registration. The default field is KTRegistrationFieldLoginName (username), and at least one of KTRegistrationFieldLoginName, KTRegistrationFieldEmailAddress or KTRegistrationFieldPhoneNumber must be included. These fields can be set in the display by using the displayFields property of the class instance.
+ */
 enum {
+    /** The user's login name (username) */
     KTRegistrationFieldLoginName        = 1,
+
+    /** The user's email address */
     KTRegistrationFieldEmailAddress     = 2,
+
+    /** The user's phone number */
     KTRegistrationFieldPhoneNumber      = 4,
+    
+    /** The user's display name */
     KTRegistrationFieldDisplayName      = 8
 };
 typedef NSUInteger KTRegistrationFields;
@@ -33,12 +43,13 @@ typedef NSUInteger KTRegistrationFields;
  Created and called by the KTLoginViewController, this view handles all the logic and UI for registering a user. As with the other view controllers, this view can be customized fully - including which text fields are displayed to the user. To access this view easily from your application's class, do something like:
  
  
-         KTLoginViewController *vc = [[KTLoginViewController alloc] init];
+    KTLoginViewController *vc = [[KTLoginViewController alloc] init];
          
-         KTRegistrationViewController *rvc = vc.registrationView;
-         // customize here
+    KTRegistrationViewController *rvc = vc.registrationView;
+        // customize here
+        ...
          
-         [self presentViewController:vc animated:TRUE completion:nil];
+    [self presentViewController:vc animated:TRUE completion:nil];
  
  
  */

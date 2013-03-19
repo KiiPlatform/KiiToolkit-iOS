@@ -18,8 +18,7 @@
 //
 
 #import "KTForgotPasswordViewController.h"
-#import "UIColor+KTUtilities.h"
-#import "KTUI.h"
+#import "KiiToolkit.h"
 
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
@@ -143,9 +142,9 @@
         
         
         // create and add the user identifier field
-        _userIdentifierField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, 100, width, 40)
-                                                   andBorderColor:lightOrange
-                                                        thatGlows:TRUE];
+        _userIdentifierField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, 100, width, 40)
+                                                andBorderColor:lightOrange
+                                                      andGlows:TRUE];
         _userIdentifierField.delegate = self;
         _userIdentifierField.placeholder = @"Email address or phone number";
         _userIdentifierField.keyboardType = UIKeyboardTypeDefault;

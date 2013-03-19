@@ -82,6 +82,10 @@ typedef NSUInteger KTAlertType;
  Create a KTAlert UI element
  
  Use this method if you wish to customize and show manually. Otherwise, try the static methods for easier use.
+ 
+ @param type The type of alert to display. See KTAlertType and KTAlert subclasses for full descriptions
+ @param message The message to display to the user. Depending on the type, be careful of the message length - it may be truncated in some alert types
+ @param durationInMillis How long to show the alert. Set to 0 for a persistent alert that you remove manually
  */
 - (KTAlert*) initWithType:(KTAlertType)type
               withMessage:(NSString*)message

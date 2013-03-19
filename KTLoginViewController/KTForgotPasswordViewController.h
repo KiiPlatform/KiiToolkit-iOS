@@ -25,12 +25,13 @@
  Created and called by the KTLoginViewController, this view handles all the logic and UI for resetting a forgotten password. As with the other view controllers, this view can be customized fully. To access this view easily from your application's class, do something like:
  
         
-        KTLoginViewController *vc = [[KTLoginViewController alloc] init];
+    KTLoginViewController *vc = [[KTLoginViewController alloc] init];
  
-        KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
+    KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
         // customize here
+        ...
  
-        [self presentViewController:vc animated:TRUE completion:nil];
+    [self presentViewController:vc animated:TRUE completion:nil];
 
  
  */

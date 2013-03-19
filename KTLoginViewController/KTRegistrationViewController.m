@@ -233,7 +233,7 @@
     
     NSMutableArray *array = [NSMutableArray array];
     
-    for(UIView *v in self.view.subviews) {
+    for(UIView *v in view.subviews) {
         if([v isKindOfClass:[UITextField class]]) {
             [array addObject:v];
         } else {
@@ -278,16 +278,6 @@
     UIColor *darkOrange = [UIColor colorWithHex:@"D27422"];
     UIColor *lightOrange = [UIColor colorWithHex:@"F89743"];
     
-    // and set our default background color (matched to background image)
-    self.view.backgroundColor = [UIColor colorWithWhite:0.76470588235f alpha:1.0f];
-    
-    // this image is a light gradient that blends in with the background
-    UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    background.image = [UIImage imageNamed:@"kt_login_bg"];
-    background.contentMode = UIViewContentModeTopLeft;
-    [self.view addSubview:background];
-    
-    
     
     // create and add the close button
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -310,9 +300,9 @@
     if((_displayFields & KTRegistrationFieldLoginName) > 0) {
         
         // create and add the field
-        _loginNameField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, yOffset, width, 40)
-                                             andBorderColor:lightOrange
-                                                  thatGlows:TRUE];
+        _loginNameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+                                           andBorderColor:lightOrange
+                                                 andGlows:TRUE];
         _loginNameField.delegate = self;
         _loginNameField.placeholder = @"Username";
         _loginNameField.keyboardType = UIKeyboardTypeDefault;
@@ -329,9 +319,9 @@
     if((_displayFields & KTRegistrationFieldEmailAddress) > 0) {
         
         // create and add the field
-        _emailAddressField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, yOffset, width, 40)
-                                                 andBorderColor:lightOrange
-                                                      thatGlows:TRUE];
+        _emailAddressField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+                                              andBorderColor:lightOrange
+                                                    andGlows:TRUE];
         _emailAddressField.delegate = self;
         _emailAddressField.placeholder = @"Email Address";
         _emailAddressField.keyboardType = UIKeyboardTypeEmailAddress;
@@ -348,9 +338,9 @@
     if((_displayFields & KTRegistrationFieldDisplayName) > 0) {
         
         // create and add the field
-        _displayNameField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, yOffset, width, 40)
-                                                andBorderColor:lightOrange
-                                                     thatGlows:TRUE];
+        _displayNameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+                                             andBorderColor:lightOrange
+                                                   andGlows:TRUE];
         _displayNameField.delegate = self;
         _displayNameField.placeholder = @"Display Name";
         _displayNameField.keyboardType = UIKeyboardTypeDefault;
@@ -366,9 +356,9 @@
     if((_displayFields & KTRegistrationFieldPhoneNumber) > 0) {
         
         // create and add the field
-        _phoneNumberField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, yOffset, width, 40)
-                                                andBorderColor:lightOrange
-                                                     thatGlows:TRUE];
+        _phoneNumberField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+                                             andBorderColor:lightOrange
+                                                   andGlows:TRUE];
         _phoneNumberField.delegate = self;
         _phoneNumberField.placeholder = @"Phone Number";
         _phoneNumberField.keyboardType = UIKeyboardTypePhonePad;
@@ -381,9 +371,9 @@
     }
     
     // create and add the password field
-    _passwordField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, yOffset, width, 40)
-                                         andBorderColor:lightOrange
-                                              thatGlows:TRUE];
+    _passwordField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+                                      andBorderColor:lightOrange
+                                            andGlows:TRUE];
     _passwordField.delegate = self;
     _passwordField.placeholder = @"Password";
     _passwordField.secureTextEntry = TRUE;

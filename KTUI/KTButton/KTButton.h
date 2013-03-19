@@ -32,6 +32,6 @@
  @param colors A nil-terminated list of UIColor objects for the background gradient. Can be any number of colors (0=clear, 1=solid color, N=gradient)
  */
 - (id)initWithFrame:(CGRect)frame
-  andGradientColors:(UIColor*)color, ... NS_REQUIRES_NIL_TERMINATION;
+  andGradientColors:(UIColor*)colors, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

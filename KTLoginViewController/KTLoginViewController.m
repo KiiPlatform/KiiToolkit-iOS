@@ -226,9 +226,9 @@
         
         
         // create and add the username field
-        _usernameField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, 100, width, 40)
-                                             andBorderColor:lightOrange
-                                                  thatGlows:TRUE];
+        _usernameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, 100, width, 40)
+                                          andBorderColor:lightOrange
+                                                andGlows:TRUE];
         _usernameField.delegate = self;
         _usernameField.placeholder = @"Username, email or phone number";
         _usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -237,9 +237,9 @@
         
         
         // create and add the password field
-        _passwordField = [[KTTextField alloc] initWithFrame:CGRectMake(xOffset, 154, width, 40)
-                                             andBorderColor:lightOrange
-                                                  thatGlows:TRUE];
+        _passwordField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, 154, width, 40)
+                                          andBorderColor:lightOrange
+                                                andGlows:TRUE];
         _passwordField.delegate = self;
         _passwordField.placeholder = @"Enter your password";
         _passwordField.secureTextEntry = TRUE;
@@ -310,6 +310,18 @@
 }
 
 
+#pragma mark - View methods
+- (void) viewDidAppear:(BOOL)animated {
+    
+    // check if this user is already logged in
+    if([KiiUser loggedIn]) {
+        
+        // if they are, hide this view
+        [self dismissViewControllerAnimated:TRUE completion:nil];
+        
+    }
+    
+}
 
 
 #pragma mark - UITextField delegate methods

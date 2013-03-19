@@ -1,0 +1,92 @@
+//
+//
+// Copyright 2013 Kii Corporation
+// http://kii.com
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//
+
+#import <UIKit/UIKit.h>
+
+enum {
+    KTRegistrationFieldLoginName        = 1,
+    KTRegistrationFieldEmailAddress     = 2,
+    KTRegistrationFieldPhoneNumber      = 4,
+    KTRegistrationFieldDisplayName      = 8
+};
+typedef NSUInteger KTRegistrationFields;
+
+@class KTTextField, KTButton;
+
+/**
+ Created and called by the KTLoginViewController, this view handles all the logic and UI for registering a user. As with the other view controllers, this view can be customized fully - including which text fields are displayed to the user. To access this view easily from your application's class, do something like:
+ 
+ 
+         KTLoginViewController *vc = [[KTLoginViewController alloc] init];
+         
+         KTRegistrationViewController *rvc = vc.registrationView;
+         // customize here
+         
+         [self presentViewController:vc animated:TRUE completion:nil];
+ 
+ 
+ */
+@interface KTRegistrationViewController : UIViewController <UITextFieldDelegate> {
+    
+    KTTextField *_loginNameField;
+    KTTextField *_emailAddressField;
+    KTTextField *_phoneNumberField;
+    KTTextField *_displayNameField;
+    KTTextField *_passwordField;
+    
+    UIButton *_closeButton;
+    KTButton *_registerButton;
+        
+    UIImageView *_titleImage;
+    
+    NSUInteger _displayFields;
+    
+}
+
+/** The title image (defaults to Kii logo) */
+@property (nonatomic, strong) UIImageView *titleImage;
+
+/** The login name input text field (default: displayed) */
+@property (nonatomic, strong) KTTextField *loginNameField;
+
+/** The email address input text field (default: not displayed) */
+@property (nonatomic, strong) KTTextField *emailAddressField;
+
+/** The display name input text field (default: not displayed) */
+@property (nonatomic, strong) KTTextField *displayNameField;
+
+/** The phone number input text field (default: not displayed) */
+@property (nonatomic, strong) KTTextField *phoneNumberField;
+
+/** The password input text field (default: displayed) */
+@property (nonatomic, strong) KTTextField *passwordField;
+
+/** The action button to initiate the registration */
+@property (nonatomic, strong) KTButton *registerButton;
+
+/** Give the user the opportunity to close the view. Hide this if the user must be authenticated */
+@property (nonatomic, strong) UIButton *closeButton;
+
+/** Set the text fields to display to the user. Pipe together all KTRegistrationFields you'd like to show. Note that password will always be shown.
+ Example:
+        registrationView.displayFields = KTRegistrationFieldLoginName | KTRegistrationFieldEmailAddress
+ */
+@property (nonatomic, assign) NSUInteger displayFields;
+
+@end

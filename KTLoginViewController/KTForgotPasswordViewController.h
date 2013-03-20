@@ -42,10 +42,14 @@
 
     UIButton *_closeButton;
     UIImageView *_titleImage;
+    UIImageView *_backgroundImage;
 }
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;
+
+/** The background image */
+@property (nonatomic, strong) UIImageView *backgroundImage;
 
 /** The user identifier text field */
 @property (nonatomic, strong) KTTextField *userIdentifierField;

@@ -65,6 +65,7 @@ typedef NSUInteger KTRegistrationFields;
     KTButton *_registerButton;
         
     UIImageView *_titleImage;
+    UIImageView *_backgroundImage;
     
     NSUInteger _displayFields;
     
@@ -72,6 +73,9 @@ typedef NSUInteger KTRegistrationFields;
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;
+
+/** The background image */
+@property (nonatomic, strong) UIImageView *backgroundImage;
 
 /** The login name input text field (default: displayed) */
 @property (nonatomic, strong) KTTextField *loginNameField;

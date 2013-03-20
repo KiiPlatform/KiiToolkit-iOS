@@ -19,6 +19,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "KTRegistrationViewController.h"
+#import "KTForgotPasswordViewController.h"
+
 @class KTTextField, KTButton;
 @class KTRegistrationViewController, KTForgotPasswordViewController;
 
@@ -47,6 +50,7 @@
     UILabel *_noAccountLabel;
     
     UIImageView *_titleImage;
+    UIImageView *_backgroundImage;
     
     KTRegistrationViewController *_registrationView;
     KTForgotPasswordViewController *_forgotPasswordView;
@@ -55,6 +59,9 @@
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;
+
+/** The background image */
+@property (nonatomic, strong) UIImageView *backgroundImage;
 
 /** The username field within the login view */
 @property (nonatomic, strong) KTTextField *usernameField;

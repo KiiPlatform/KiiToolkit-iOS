@@ -25,13 +25,23 @@
 // TODO: make attributes customizable
 @interface KTButton : UIButton
 
+/** Set the border color for the button. Defaults to the lower gradient color, or clear if no colors set */
+@property (nonatomic, strong) UIColor *borderColor;
+
 /**
  Create a KTButton with a nice looking, graphic-free background
  
  @param frame The frame of the button within its parent view
- @param colors A nil-terminated list of UIColor objects for the background gradient. Can be any number of colors (0=clear, 1=solid color, N=gradient)
+ @param colors A nil-terminated list of UIColor objects for the background gradient. Can be any number of colors (0=clear, 1=solid color, N=gradient). The fill is from top to bottom
  */
 - (id)initWithFrame:(CGRect)frame
   andGradientColors:(UIColor*)colors, ... NS_REQUIRES_NIL_TERMINATION;
+
+/**
+ Set the gradient background colors
+ 
+ @param colors A nil-terminated list of UIColor objects for the background gradient. Can be any number of colors (0=clear, 1=solid color, N=gradient). The fill is from top to bottom
+ */
+- (void) setGradientColors:(UIColor*)colors, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

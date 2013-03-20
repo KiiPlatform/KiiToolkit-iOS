@@ -31,6 +31,7 @@
 @synthesize sendResetButton = _sendResetButton;
 @synthesize closeButton = _closeButton;
 @synthesize titleImage = _titleImage;
+@synthesize backgroundImage = _backgroundImage;
 
 #pragma mark - Action methods
 
@@ -117,10 +118,10 @@
         self.view.backgroundColor = [UIColor colorWithWhite:0.76470588235f alpha:1.0f];
         
         // this image is a light gradient that blends in with the background
-        UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        background.image = [UIImage imageNamed:@"kt_login_bg"];
-        background.contentMode = UIViewContentModeTopLeft;
-        [self.view addSubview:background];
+        _backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        _backgroundImage.image = [UIImage imageNamed:@"kt_login_bg"];
+        _backgroundImage.contentMode = UIViewContentModeTopLeft;
+        [self.view addSubview:_backgroundImage];
 
 
         
@@ -136,7 +137,9 @@
         
         // create and add the title image (defaults to Kii logo)
         _titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kt_login_kii_logo"]];
-        _titleImage.frame = CGRectMake(111, 20, 97, 60);
+        _titleImage.contentMode = UIViewContentModeCenter;
+        _titleImage.clipsToBounds = FALSE;
+        _titleImage.frame = CGRectMake(20, 30, 280, 70);
         [self.view addSubview:_titleImage];
 
         

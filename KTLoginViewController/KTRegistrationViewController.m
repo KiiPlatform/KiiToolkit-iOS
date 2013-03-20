@@ -42,6 +42,7 @@
 @synthesize displayNameField = _displayNameField;
 @synthesize passwordField = _passwordField;
 @synthesize titleImage = _titleImage;
+@synthesize backgroundImage = _backgroundImage;
 @synthesize registerButton = _registerButton;
 @synthesize closeButton = _closeButton;
 @synthesize displayFields = _displayFields;
@@ -291,7 +292,9 @@
     
     // create and add the title image (defaults to Kii logo)
     _titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kt_login_kii_logo"]];
-    _titleImage.frame = CGRectMake(111, 20, 97, 60);
+    _titleImage.contentMode = UIViewContentModeCenter;
+    _titleImage.clipsToBounds = FALSE;
+    _titleImage.frame = CGRectMake(20, 30, 280, 70);
     [_scrollContainer addSubview:_titleImage];
 
     
@@ -419,15 +422,14 @@
         // set our default display field(s) to login name (username) only
         _displayFields = KTRegistrationFieldLoginName;
         
-        
         // and set our default background color (matched to background image)
         self.view.backgroundColor = [UIColor colorWithWhite:0.76470588235f alpha:1.0f];
         
         // this image is a light gradient that blends in with the background
-        UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        background.image = [UIImage imageNamed:@"kt_login_bg"];
-        background.contentMode = UIViewContentModeTopLeft;
-        [self.view addSubview:background];
+        _backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        _backgroundImage.image = [UIImage imageNamed:@"kt_login_bg"];
+        _backgroundImage.contentMode = UIViewContentModeTopLeft;
+        [self.view addSubview:_backgroundImage];
         
         // create and add the scroll container
         _scrollContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];

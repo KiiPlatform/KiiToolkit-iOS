@@ -40,4 +40,11 @@
  */
 + (UIColor*) colorWithHex:(NSString*)hex;
 
+/**
+ Generates a random color
+ 
+ @return a UIColor object with a random value
+ */
++ (UIColor*) randomColor;
+
 @end

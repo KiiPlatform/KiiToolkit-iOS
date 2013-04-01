@@ -17,19 +17,16 @@
 //
 //
 
+#import "UIView+KTUtilities.h"
 
-/**
- Import this file for including the KTUI subset.
- */
+@implementation UIView (KTUtilities)
 
-#import "KTLoader.h"
-#import "KTAlert.h"
-#import "KTButton.h"
-#import "KTTextField.h"
-#import "KTImageView.h"
-#import "KTProgressBar.h"
+- (void) normalizeView
+{
+    CGRect f = self.frame;
+    f.origin.y = round(f.origin.y);
+    f.origin.x = round(f.origin.x);
+    self.frame = f;
+}
 
-// set some defaults that we use throughout the UI Framework
-#define KT_KEYBOARD_ANIMATION_TIME     0.28f
-#define KT_KEYBOARD_PADDING_HEIGHT     75.0f
-#define KT_KEYBOARD_HEIGHT             216.0f
+@end

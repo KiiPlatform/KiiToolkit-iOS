@@ -1,0 +1,741 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>KTImageView Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">KiiToolkit </a></h1>
+				<a id="developerHome" href="../index.html">Kii</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">KTImageView Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/imageFile">&nbsp;&nbsp;&nbsp;&nbsp;imageFile</option>
+	
+	<option value="//api/name/progressIndicator">&nbsp;&nbsp;&nbsp;&nbsp;progressIndicator</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/createWithFrame:andKiiFile:">&nbsp;&nbsp;&nbsp;&nbsp;+ createWithFrame:andKiiFile:</option>
+	
+	<option value="//api/name/createWithFrame:andKiiFile:withProgress:andCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;+ createWithFrame:andKiiFile:withProgress:andCompletion:</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/initWithFrame:andKiiFile:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithFrame:andKiiFile:</option>
+	
+	<option value="//api/name/show">&nbsp;&nbsp;&nbsp;&nbsp;- show</option>
+	
+	<option value="//api/name/showWithProgress:andCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- showWithProgress:andCompletion:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/imageFile">imageFile</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/progressIndicator">progressIndicator</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/createWithFrame:andKiiFile:">createWithFrame:andKiiFile:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/createWithFrame:andKiiFile:withProgress:andCompletion:">createWithFrame:andKiiFile:withProgress:andCompletion:</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithFrame:andKiiFile:">initWithFrame:andKiiFile:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/show">show</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showWithProgress:andCompletion:">showWithProgress:andCompletion:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="KTImageView Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">KTImageView Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UIImageView</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">KTImageView.h<br />KTImageView.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>A UI element that will asynchronously load and display a KiiFile image in a UIImageView by simply passing in a valid KiiFile object. Also provides a progress indicator by default. All attributes can be overriden and customized.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/imageFile">&nbsp;&nbsp;imageFile</a></code>
+		<span class="tooltip"><p>The KiiFile object associated with the KTImageView. Setting this alone won&rsquo;t load the file, you must also call show:</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/progressIndicator">&nbsp;&nbsp;progressIndicator</a></code>
+		<span class="tooltip"><p>The progress indicator, visible and on by default</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithFrame:andKiiFile:">&ndash;&nbsp;initWithFrame:andKiiFile:</a></code>
+		<span class="tooltip"><p>Initialize a KTImageView object</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/createWithFrame:andKiiFile:">+&nbsp;createWithFrame:andKiiFile:</a></code>
+		<span class="tooltip"><p>Create a KTImageView object and begin loading the image automatically</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/createWithFrame:andKiiFile:withProgress:andCompletion:">+&nbsp;createWithFrame:andKiiFile:withProgress:andCompletion:</a></code>
+		<span class="tooltip"><p>Create a KTImageView object and begin loading the image automatically &ndash; with callbacks</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/show">&ndash;&nbsp;show</a></code>
+		<span class="tooltip"><p>Start downloading the image file and display the image once it&rsquo;s ready</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/showWithProgress:andCompletion:">&ndash;&nbsp;showWithProgress:andCompletion:</a></code>
+		<span class="tooltip"><p>Start downloading the image file and display the image once it&rsquo;s ready &ndash; with callbacks</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/imageFile" title="imageFile"></a>
+	<h3 class="subsubtitle method-title">imageFile</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The KiiFile object associated with the KTImageView. Setting this alone won&rsquo;t load the file, you must also call show:</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) KiiFile *imageFile</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The KiiFile object associated with the KTImageView. Setting this alone won&rsquo;t load the file, you must also call show:</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/progressIndicator" title="progressIndicator"></a>
+	<h3 class="subsubtitle method-title">progressIndicator</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The progress indicator, visible and on by default</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) KTProgressBar *progressIndicator</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The progress indicator, visible and on by default</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/createWithFrame:andKiiFile:" title="createWithFrame:andKiiFile:"></a>
+	<h3 class="subsubtitle method-title">createWithFrame:andKiiFile:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Create a KTImageView object and begin loading the image automatically</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (KTImageView *)createWithFrame:(CGRect)<em>frame</em> andKiiFile:(KiiFile *)<em>imageFile</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>frame</em></dt>
+			<dd><p>The frame of the image view</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>imageFile</em></dt>
+			<dd><p>The KiiFile object to load and display</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A KTImageView object</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Create a KTImageView object and begin loading the image automatically</p>
+
+<p>If you wish to customize your view before it starts loading, use the init and <a href="#//api/name/show">show</a> method(s). This method will automatically begin loading the image file into the view. This method provides no callbacks &ndash; if you wish to know when the image is progressing/loaded, use one of the other creation methods with blocks.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/createWithFrame:andKiiFile:withProgress:andCompletion:" title="createWithFrame:andKiiFile:withProgress:andCompletion:"></a>
+	<h3 class="subsubtitle method-title">createWithFrame:andKiiFile:withProgress:andCompletion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Create a KTImageView object and begin loading the image automatically &ndash; with callbacks</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (KTImageView *)createWithFrame:(CGRect)<em>frame</em> andKiiFile:(KiiFile *)<em>imageFile</em> withProgress:(KTImageViewProgressBlock)<em>progressBlock</em> andCompletion:(KTImageViewCompletionBlock)<em>completionBlock</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>frame</em></dt>
+			<dd><p>The frame of the image view</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>imageFile</em></dt>
+			<dd><p>The KiiFile object to load and display</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>progressBlock</em></dt>
+			<dd><p>Called as the image file is downloading</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionBlock</em></dt>
+			<dd><p>Called once the image file is downloaded (or if an error occurred)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A KTImageView object</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Create a KTImageView object and begin loading the image automatically &ndash; with callbacks</p>
+
+<p>If you wish to customize your view before it starts loading, use the init and <a href="#//api/name/show">show</a> method(s). This method will automatically begin loading the image file into the view. This method provides callback blocks for you to receive updates as the image is downloaded and shown</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithFrame:andKiiFile:" title="initWithFrame:andKiiFile:"></a>
+	<h3 class="subsubtitle method-title">initWithFrame:andKiiFile:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialize a KTImageView object</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (KTImageView *)initWithFrame:(CGRect)<em>frame</em> andKiiFile:(KiiFile *)<em>imageFile</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>frame</em></dt>
+			<dd><p>The frame of the image view</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>imageFile</em></dt>
+			<dd><p>The KiiFile object to load and display</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A KTImageView object</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialize a KTImageView object</p>
+
+<p>Make sure that you call one of the show: methods once initialized and added to your view. This method will simply create the object.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/show" title="show"></a>
+	<h3 class="subsubtitle method-title">show</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Start downloading the image file and display the image once it&rsquo;s ready</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)show</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Start downloading the image file and display the image once it&rsquo;s ready</p>
+
+<p>This method provides no callbacks. If you wish to have notifications, use the other show method</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/showWithProgress:andCompletion:" title="showWithProgress:andCompletion:"></a>
+	<h3 class="subsubtitle method-title">showWithProgress:andCompletion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Start downloading the image file and display the image once it&rsquo;s ready &ndash; with callbacks</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)showWithProgress:(KTImageViewProgressBlock)<em>progressBlock</em> andCompletion:(KTImageViewCompletionBlock)<em>completionBlock</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>progressBlock</em></dt>
+			<dd><p>Called as the image file is downloading</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionBlock</em></dt>
+			<dd><p>Called once the image file is downloaded (or if an error occurred)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Start downloading the image file and display the image once it&rsquo;s ready &ndash; with callbacks</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTImageView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 Kii. All rights reserved. (Last updated: 2013-03-31)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KTForgotPasswordViewController Class Reference</title>
+		<title>KTProgressBar Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KTForgotPasswordViewController Class Reference</h1>
+				<h1 class="hideInXcode">KTProgressBar Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -40,19 +40,18 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/backgroundImage">&nbsp;&nbsp;&nbsp;&nbsp;backgroundImage</option>
+	<option value="//api/name/progress">&nbsp;&nbsp;&nbsp;&nbsp;progress</option>
 	
-	<option value="//api/name/closeButton">&nbsp;&nbsp;&nbsp;&nbsp;closeButton</option>
-	
-	<option value="//api/name/sendResetButton">&nbsp;&nbsp;&nbsp;&nbsp;sendResetButton</option>
-	
-	<option value="//api/name/titleImage">&nbsp;&nbsp;&nbsp;&nbsp;titleImage</option>
-	
-	<option value="//api/name/userIdentifierField">&nbsp;&nbsp;&nbsp;&nbsp;userIdentifierField</option>
+	<option value="//api/name/subProgressView">&nbsp;&nbsp;&nbsp;&nbsp;subProgressView</option>
 	
 	
 	
 	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/setProgress:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- setProgress:animated:</option>
 	
 	
 	
@@ -78,15 +77,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/backgroundImage">backgroundImage</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/progress">progress</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/closeButton">closeButton</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendResetButton">sendResetButton</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/titleImage">titleImage</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/userIdentifierField">userIdentifierField</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/subProgressView">subProgressView</a></span></li>
 	
 </ul></li>
 
@@ -94,12 +87,18 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setProgress:animated:">setProgress:animated:</a></span></li>
+	
+</ul></li>
+
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KTForgotPasswordViewController Class Reference" name="top"></a>
+				<a title="KTProgressBar Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -108,7 +107,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KTForgotPasswordViewController Class Reference</h1>
+						<h1 class="title title-header">KTProgressBar Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -116,13 +115,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">UIViewController</td>
-</tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">UITextFieldDelegate</td>
+	<td class="specification-value">UIView</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KTForgotPasswordViewController.h<br />KTForgotPasswordViewController.m</td>
+	<td class="specification-value">KTProgressBar.h<br />KTProgressBar.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -132,15 +128,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Created and called by the <a href="../Classes/KTLoginViewController.html">KTLoginViewController</a>, this view handles all the logic and UI for resetting a forgotten password. As with the other view controllers, this view can be customized fully. To access this view easily from your application&rsquo;s class, do something like:</p>
-
-<pre><code>KTLoginViewController *vc = [[KTLoginViewController alloc] init];
-
-KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
-    // customize here
-
-[self presentViewController:vc animated:TRUE completion:nil];
-</code></pre>
+						<p>A UI element that displays a <a href="#//api/name/progress">progress</a> bar. This class will be skinnable with a few default types to get you started. It is meant to be a nicer-looking, more customizable solution to the standard iOS UIProgressView</p>
 					</div>
 					
 					
@@ -158,38 +146,24 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/titleImage">&nbsp;&nbsp;titleImage</a></code>
-		<span class="tooltip"><p>The title image (defaults to Kii logo)</p></span>
+		<code><a href="#//api/name/progress">&nbsp;&nbsp;progress</a></code>
+		<span class="tooltip"><p>The current progress value of the bar [0, 1] *</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/backgroundImage">&nbsp;&nbsp;backgroundImage</a></code>
-		<span class="tooltip"><p>The background image</p></span>
+		<code><a href="#//api/name/subProgressView">&nbsp;&nbsp;subProgressView</a></code>
+		<span class="tooltip"><p>The inside view (the actual <a href="#//api/name/progress">progress</a> bar, inside the container)</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/userIdentifierField">&nbsp;&nbsp;userIdentifierField</a></code>
-		<span class="tooltip"><p>The user identifier text field</p></span>
+		<code><a href="#//api/name/setProgress:animated:">&ndash;&nbsp;setProgress:animated:</a></code>
+		<span class="tooltip"><p>Set the <a href="#//api/name/progress">progress</a> with bar growth animation</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
 	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/sendResetButton">&nbsp;&nbsp;sendResetButton</a></code>
-		<span class="tooltip"><p>The action button to reset the password</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/closeButton">&nbsp;&nbsp;closeButton</a></code>
-		<span class="tooltip"><p>Give the user the opportunity to close the view. Hide this if the user must be authenticated</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -205,18 +179,18 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/backgroundImage" title="backgroundImage"></a>
-	<h3 class="subsubtitle method-title">backgroundImage</h3>
+	<a name="//api/name/progress" title="progress"></a>
+	<h3 class="subsubtitle method-title">progress</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The background image</p>
+		<p>The current progress value of the bar [0, 1] *</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIImageView *backgroundImage</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) double progress</code></div>
 
     
 	
@@ -228,7 +202,7 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The background image</p>
+		<p>The current progress value of the bar [0, 1] *</p>
 	</div>
 	
 	
@@ -239,25 +213,25 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTForgotPasswordViewController.h</code><br />
+		<code class="declared-in-ref">KTProgressBar.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/closeButton" title="closeButton"></a>
-	<h3 class="subsubtitle method-title">closeButton</h3>
+	<a name="//api/name/subProgressView" title="subProgressView"></a>
+	<h3 class="subsubtitle method-title">subProgressView</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Give the user the opportunity to close the view. Hide this if the user must be authenticated</p>
+		<p>The inside view (the actual <a href="#//api/name/progress">progress</a> bar, inside the container)</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIButton *closeButton</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIView *subProgressView</code></div>
 
     
 	
@@ -269,7 +243,7 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Give the user the opportunity to close the view. Hide this if the user must be authenticated</p>
+		<p>The inside view (the actual <a href="#//api/name/progress">progress</a> bar, inside the container)</p>
 	</div>
 	
 	
@@ -280,130 +254,7 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTForgotPasswordViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/sendResetButton" title="sendResetButton"></a>
-	<h3 class="subsubtitle method-title">sendResetButton</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The action button to reset the password</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) KTButton *sendResetButton</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The action button to reset the password</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTForgotPasswordViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/titleImage" title="titleImage"></a>
-	<h3 class="subsubtitle method-title">titleImage</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The title image (defaults to Kii logo)</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIImageView *titleImage</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The title image (defaults to Kii logo)</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTForgotPasswordViewController.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/userIdentifierField" title="userIdentifierField"></a>
-	<h3 class="subsubtitle method-title">userIdentifierField</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The user identifier text field</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) KTTextField *userIdentifierField</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The user identifier text field</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTForgotPasswordViewController.h</code><br />
+		<code class="declared-in-ref">KTProgressBar.h</code><br />
 	</div>				
 	
 	
@@ -414,6 +265,70 @@ KTForgotPasswordViewController *fpvc = vc.forgotPasswordView;
 					
 					
 					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/setProgress:animated:" title="setProgress:animated:"></a>
+	<h3 class="subsubtitle method-title">setProgress:animated:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Set the <a href="#//api/name/progress">progress</a> with bar growth animation</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)setProgress:(double)<em>progress</em> animated:(BOOL)<em>animated</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>progress</em></dt>
+			<dd><p>The value [0,1] to set the <a href="#//api/name/progress">progress</a> bar to</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>TRUE if the <a href="#//api/name/progress">progress</a> bar should &lsquo;grow&rsquo; with animation. FALSE otherwise</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Set the <a href="#//api/name/progress">progress</a> with bar growth animation</p>
+
+<p>This method should be called if you don&rsquo;t wish to have animation with the standard <a href="#//api/name/progress">progress</a> property (or <a href="#//api/name/progress">setProgress:</a> method call), as the animation default is usually TRUE</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTProgressBar.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 				</div>

@@ -51,6 +51,7 @@
     // create the progress indicator
     CGRect f = CGRectMake(0, 0, width, height);
     _progressIndicator = [[KTProgressBar alloc] initWithFrame:f];
+    [self addSubview:_progressIndicator];
     
     // center the progress bar
     _progressIndicator.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);

@@ -251,6 +251,12 @@ static KTAppRater *sharedInstance = nil;
     else if(buttonIndex == 2) {
         [KTAppRater setLastDelayed];
     }
+    
+    // the user has chosen to not show again
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:KTAPPRATER_STORED_HAS_DECLINED];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 - (void) configureAppID:(NSString*)appId

@@ -19,6 +19,8 @@
 
 #import "KTTableViewController.h"
 
+#if __has_include(<KiiSDK/Kii.h>)
+
 #import <KiiSDK/Kii.h>
 
 #define REFRESH_HEADER_HEIGHT   52.0f
@@ -378,3 +380,5 @@
 
 
 @end
+
+#endif

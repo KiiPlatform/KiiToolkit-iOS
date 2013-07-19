@@ -19,6 +19,8 @@
 
 #import "KTImageView.h"
 
+#if __has_include(<KiiSDK/Kii.h>)
+
 #import <KiiSDK/Kii.h>
 
 #import "UIView+KTUtilities.h"
@@ -145,3 +147,5 @@
 }
 
 @end
+
+#endif

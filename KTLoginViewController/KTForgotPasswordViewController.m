@@ -18,8 +18,10 @@
 //
 
 #import "KTForgotPasswordViewController.h"
-#import "KiiToolkit.h"
 
+#if __has_include(<KiiSDK/Kii.h>)
+
+#import "KiiToolkit.h"
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -189,3 +191,5 @@
 
 
 @end
+
+#endif

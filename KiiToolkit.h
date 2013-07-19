@@ -26,6 +26,7 @@
 #import "KTUtilities.h"
 #import "KTLoginViewController.h"
 #import "KTTableViewController.h"
+#import "KTAppRater.h"
 
 
 // TOOD: create KTViewController that has textfield shifting/background tapping

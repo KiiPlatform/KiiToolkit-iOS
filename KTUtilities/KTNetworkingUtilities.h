@@ -17,12 +17,22 @@
 //
 //
 
+#import <Foundation/Foundation.h>
 
 /**
- Import this file for including the KTUtility subset.
+ A set of utilities that assist you with determining network connectivity status and other networking features.
  */
+@interface KTNetworkingUtilities : NSObject
 
-#import "UIColor+KTUtilities.h"
-#import "UIView+KTUtilities.h"
-#import "NSMutableArray+KTUtilities.h"
-#import "KTNetworkingUtilities.h"
+/**
+ Determines whether or not the device has a valid network connection
+ 
+ It's useful to check this method sometimes before you display or perform network-related functions.
+ 
+ @return TRUE if there is a valid connection, FALSE otherwise
+ */
++ (BOOL) hasConnection;
+
+// TODO: add other methods that specify connection types
+
+@end

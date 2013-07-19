@@ -29,6 +29,21 @@
 @interface KTRegistrationViewController () {
     UIScrollView *_scrollContainer;
     CGFloat _originalY;
+    
+    KTTextField *_loginNameField;
+    KTTextField *_emailAddressField;
+    KTTextField *_phoneNumberField;
+    KTTextField *_displayNameField;
+    KTTextField *_passwordField;
+    
+    UIButton *_closeButton;
+    KTButton *_registerButton;
+    
+    UIImageView *_titleImage;
+    UIImageView *_backgroundImage;
+    
+    NSUInteger _displayFields;
+
 }
 
 - (void) drawView;

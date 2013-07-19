@@ -53,23 +53,7 @@ typedef NSUInteger KTRegistrationFields;
  
  
  */
-@interface KTRegistrationViewController : UIViewController <UITextFieldDelegate> {
-    
-    KTTextField *_loginNameField;
-    KTTextField *_emailAddressField;
-    KTTextField *_phoneNumberField;
-    KTTextField *_displayNameField;
-    KTTextField *_passwordField;
-    
-    UIButton *_closeButton;
-    KTButton *_registerButton;
-        
-    UIImageView *_titleImage;
-    UIImageView *_backgroundImage;
-    
-    NSUInteger _displayFields;
-    
-}
+@interface KTRegistrationViewController : UIViewController <UITextFieldDelegate>
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;

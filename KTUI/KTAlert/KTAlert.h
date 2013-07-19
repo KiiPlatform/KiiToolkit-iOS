@@ -40,10 +40,7 @@ typedef NSUInteger KTAlertType;
 /**
  A UI element that displays an alert to the user. Differing from UIAlertView, this class is meant to show nice-looking and/or more subtle, less invasive alerts.
  */
-@interface KTAlert : UIView {
-    NSUInteger _duration;
-    NSString *_message;
-}
+@interface KTAlert : UIView
 
 #pragma mark - Public Static Methods
 

@@ -31,6 +31,8 @@
 
 @interface KTAlert() {
     KTAlertType _type;
+    NSUInteger _duration;
+    NSString *_message;
 }
 
 - (void) configure;

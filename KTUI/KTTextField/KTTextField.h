@@ -22,12 +22,7 @@
 /**
  A subclassed UITextField with some UI improvements
  */
-@interface KTTextField : UITextField {
-    
-    UIColor *_borderColor;
-    BOOL _glows;
-    
-}
+@interface KTTextField : UITextField
 
 /** Set the border color for the textview (defaults to [UIColor clearColor]) */
 @property (nonatomic, strong) UIColor *borderColor;

@@ -35,15 +35,7 @@
 
  
  */
-@interface KTForgotPasswordViewController : UIViewController <UITextFieldDelegate> {
-    
-    KTTextField *_userIdentifierField;
-    KTButton *_sendResetButton;
-
-    UIButton *_closeButton;
-    UIImageView *_titleImage;
-    UIImageView *_backgroundImage;
-}
+@interface KTForgotPasswordViewController : UIViewController <UITextFieldDelegate>
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;

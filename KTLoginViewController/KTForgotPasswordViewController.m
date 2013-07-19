@@ -25,6 +25,18 @@
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
 
+@interface KTForgotPasswordViewController() {
+    
+    KTTextField *_userIdentifierField;
+    KTButton *_sendResetButton;
+    
+    UIButton *_closeButton;
+    UIImageView *_titleImage;
+    UIImageView *_backgroundImage;
+
+}
+
+@end
 
 @implementation KTForgotPasswordViewController
 

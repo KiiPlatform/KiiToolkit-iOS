@@ -38,24 +38,7 @@
     KiiUser *user = [KiiUser currentUser];
 
  */
-@interface KTLoginViewController : UIViewController <UITextFieldDelegate> {
-    
-    KTTextField *_usernameField;
-    KTTextField *_passwordField;
-    
-    UIButton *_closeButton;
-    KTButton *_registerButton;
-    KTButton *_loginButton;
-    UIButton *_forgotButton;
-    UILabel *_noAccountLabel;
-    
-    UIImageView *_titleImage;
-    UIImageView *_backgroundImage;
-    
-    KTRegistrationViewController *_registrationView;
-    KTForgotPasswordViewController *_forgotPasswordView;
-
-}
+@interface KTLoginViewController : UIViewController <UITextFieldDelegate>
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;

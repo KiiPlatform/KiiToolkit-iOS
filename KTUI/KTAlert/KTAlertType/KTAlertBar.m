@@ -30,7 +30,6 @@
 
 - (void) configure
 {
-    
     // build the container view
     self.backgroundColor = [UIColor clearColor];
     self.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -40,7 +39,7 @@
     
     // create a label with the message
     UILabel *toastLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    toastLabel.text = _message;
+    toastLabel.text = self.message;
     toastLabel.textColor = KT_ALERTBAR_TEXT_COLOR;
     toastLabel.numberOfLines = 1;
     toastLabel.backgroundColor = [UIColor clearColor];

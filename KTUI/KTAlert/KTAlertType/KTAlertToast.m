@@ -44,7 +44,7 @@
     
     // build the text label
     UILabel *toastLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    toastLabel.text = _message;
+    toastLabel.text = self.message;
     toastLabel.textColor = KT_TOAST_TEXT_COLOR;
     toastLabel.numberOfLines = 1000;
     toastLabel.backgroundColor = [UIColor clearColor];

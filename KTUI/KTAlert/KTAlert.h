@@ -42,6 +42,8 @@ typedef NSUInteger KTAlertType;
  */
 @interface KTAlert : UIView
 
+@property (nonatomic, strong) NSString *message;
+
 #pragma mark - Public Static Methods
 
 /**

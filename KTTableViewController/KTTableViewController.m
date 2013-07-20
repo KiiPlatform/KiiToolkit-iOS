@@ -84,17 +84,12 @@
         
         // set the limit
         localQuery.limit = _pageSize;
-        
-        NSLog(@"Executing query: %@", localQuery);
-        
+                
         [_bucket executeQuery:localQuery
                     withBlock:^(KiiQuery *bucketQuery, KiiBucket *bucket, NSArray *results, KiiQuery *nextQuery, NSError *error) {
                                                 
                         if(error == nil) {
-                            
-                            NSLog(@"Current query: %@", _query);
-                            NSLog(@"Next query: %@", nextQuery);
-                            
+                                                        
                             _results = [results mutableCopy];
 
                             [self doneLoading];

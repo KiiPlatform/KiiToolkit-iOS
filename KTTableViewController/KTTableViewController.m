@@ -22,6 +22,7 @@
 #if __has_include(<KiiSDK/Kii.h>)
 
 #import <KiiSDK/Kii.h>
+#import "KTAlert.h"
 
 #define REFRESH_HEADER_HEIGHT   52.0f
 #define ERROR_DISPLAY_TIME      5000
@@ -41,11 +42,12 @@
     BOOL _isDragging;
     
     UIView *_refreshHeader;
-    UIActivityIndicatorView *_spinner;
+    UIActivityIndicatorView *_refreshSpinner;
 
     UIView *_refreshNoticeView;
-    UIView *_errorHeader;
-    UILabel *_errorLabel;
+    UILabel *_refreshNoticeLabel;
+    CKRefreshArrowView *_loadingArrow;
+
 }
 
 @end
@@ -59,28 +61,39 @@
 @synthesize paginationEnabled = _paginationEnabled;
 @synthesize refreshControlEnabled = _refreshControlEnabled;
 @synthesize refreshNoticeView = _refreshNoticeView;
+@synthesize refreshSpinner = _refreshSpinner;
+@synthesize refreshNoticeLabel = _refreshNoticeLabel;
+@synthesize loadingArrow = _loadingArrow;
 
-- (void) showError:(NSString*)message
+- (void) setRefreshControlEnabled:(BOOL)refreshControlEnabled
 {
-    _errorLabel.text = message;
-    [UIView animateWithDuration:1.0f
-                     animations:^{
-                         _errorHeader.alpha = 1.0f;
-                     }];
+    _refreshHeader.hidden = !refreshControlEnabled;
+    _refreshControlEnabled = refreshControlEnabled;
 }
 
 - (void) refreshQuery
 {
     
+    if([self respondsToSelector:@selector(tableDidStartLoading)]) {
+        [self performSelector:@selector(tableDidStartLoading)];
+    }
+    
     if(_bucket != nil && _query != nil) {
-                
-        // set the limit
-        _query.limit = _pageSize;
         
-        [_bucket executeQuery:_query
+        KiiQuery *localQuery = _query;
+        
+        // set the limit
+        localQuery.limit = _pageSize;
+        
+        NSLog(@"Executing query: %@", localQuery);
+        
+        [_bucket executeQuery:localQuery
                     withBlock:^(KiiQuery *bucketQuery, KiiBucket *bucket, NSArray *results, KiiQuery *nextQuery, NSError *error) {
                                                 
                         if(error == nil) {
+                            
+                            NSLog(@"Current query: %@", _query);
+                            NSLog(@"Next query: %@", nextQuery);
                             
                             _results = [results mutableCopy];
 
@@ -91,35 +104,36 @@
                             
                         } else {
                             
+                            [self doneLoading];
+
                             if(_autoHandleErrors) {
-                                
-                                // show our error view
-                                [self showError:@"Unable to load items"];
-                                
-                                // hide the error after a timeout
-                                [self performSelector:@selector(doneLoading) withObject:nil afterDelay:ERROR_DISPLAY_TIME];
-                                
-                            } else {
-                                [self doneLoading];
+                                [KTAlert showAlert:KTAlertTypeBar
+                                       withMessage:@"Unable to load items"
+                                       andDuration:KTAlertDurationLong];
                             }
+                            
                         }
-                        
+
+                        if([self respondsToSelector:@selector(tableDidFinishLoading:)]) {
+                            [self performSelector:@selector(tableDidFinishLoading:) withObject:error];
+                        }
+
                     }];
     } else {
-        // make note of the error
-        // TODO: send error callback to delegate
         
         if(_autoHandleErrors) {
-
-            // show our error view
-            [self showError:@"Unable to load items"];
-            
-            // hide the error after a timeout
-            [self performSelector:@selector(doneLoading) withObject:nil afterDelay:ERROR_DISPLAY_TIME];
-            
-        } else {
-            [self doneLoading];
+            [KTAlert showAlert:KTAlertTypeBar
+                   withMessage:@"Unable to load items"
+                   andDuration:KTAlertDurationLong];
         }
+        
+        [self doneLoading];
+        
+        if([self respondsToSelector:@selector(tableDidFinishLoading:)]) {
+            NSError *error = [NSError errorWithDomain:@"com.kii.kiitoolkit" code:101 userInfo:@{NSLocalizedDescriptionKey: @"Either the bucket or the query was undefined"}];
+            [self performSelector:@selector(tableDidFinishLoading:) withObject:error];
+        }
+
     }
 
 }
@@ -151,27 +165,13 @@
     }
 }
 
-- (id) initWithStyle:(UITableViewStyle)style
-        andKiiBucket:(KiiBucket*)bucket
-            andQuery:(KiiQuery*)query
-{
-    self = [super initWithStyle:style];
-    
-    if(self) {
-        _bucket = bucket;
-        _query = query;
-    }
-    
-    return self;
-}
-
 - (void) viewDidLoad {
     
     _autoHandleErrors = TRUE;
     _results = [[NSMutableArray alloc] init];
     
-    self.paginationEnabled = TRUE;
-    self.refreshControlEnabled = TRUE;
+    _paginationEnabled = TRUE;
+    _refreshControlEnabled = TRUE;
     
     self.tableView.delegate = self;
     
@@ -181,38 +181,31 @@
     [self.tableView addSubview:_refreshHeader];
     
     _refreshNoticeView = [[UIView alloc] initWithFrame:_refreshHeader.bounds];
-    UILabel *refreshLabel = [[UILabel alloc] initWithFrame:_refreshNoticeView.bounds];
-    refreshLabel.backgroundColor = [UIColor clearColor];
-    refreshLabel.text = @"Pull to refresh...";
-    refreshLabel.textAlignment = NSTextAlignmentCenter;
     
-    [_refreshNoticeView addSubview:refreshLabel];
+    _refreshNoticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, _refreshHeader.bounds.size.width-60, REFRESH_HEADER_HEIGHT)];
+    _refreshNoticeLabel.backgroundColor = [UIColor clearColor];
+    _refreshNoticeLabel.text = @"Pull to refresh...";
+    _refreshNoticeLabel.textAlignment = NSTextAlignmentLeft;
+    
+    [_refreshNoticeView addSubview:_refreshNoticeLabel];
     [_refreshHeader addSubview:_refreshNoticeView];
     
-    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _spinner.center = (CGPoint){
+    CGFloat offset = (REFRESH_HEADER_HEIGHT-36)/2;
+    _loadingArrow = [[CKRefreshArrowView alloc] initWithFrame:CGRectMake(roundf(offset), roundf(offset), 36, 36)];
+    _loadingArrow.tintColor = [UIColor blackColor];
+    _loadingArrow.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [_refreshNoticeView addSubview:_loadingArrow];
+    
+    _refreshSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _refreshSpinner.center = (CGPoint){
         .x = CGRectGetMidX(_refreshHeader.bounds),
         .y = CGRectGetMidY(_refreshHeader.bounds)
     };
-//    _spinner.color = [UIColor redColor];
-    _spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+    _refreshSpinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
                                  UIViewAutoresizingFlexibleRightMargin |
                                  UIViewAutoresizingFlexibleTopMargin |
                                  UIViewAutoresizingFlexibleBottomMargin);
-    [_refreshHeader addSubview:_spinner];
-
-    _errorHeader = [[UIView alloc] initWithFrame:_refreshHeader.bounds];
-    _errorHeader.alpha = 0.f;
-    _errorHeader.backgroundColor = [UIColor redColor];
-    
-    _errorLabel = [[UILabel alloc] initWithFrame:_errorHeader.bounds];
-    _errorLabel.textColor = [UIColor whiteColor];
-    _errorLabel.backgroundColor = [UIColor clearColor];
-    _errorLabel.text = @"Error Loading!";
-    _errorLabel.textAlignment = NSTextAlignmentCenter;
-    [_errorHeader addSubview:_errorLabel];
-    
-    [_refreshHeader addSubview:_errorHeader];
+    [_refreshHeader addSubview:_refreshSpinner];
     
     [self refreshQuery];
 }
@@ -278,22 +271,24 @@
 
     else if (_isLoading) {
         // Update the content inset, good for section headers
-        if (scrollView.contentOffset.y > 0)
+        if (scrollView.contentOffset.y > 0) {
             self.tableView.contentInset = UIEdgeInsetsZero;
-        else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
+        } else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT) {
             self.tableView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    } else if (_isDragging && scrollView.contentOffset.y < 0) {
+        }
+    }
+    
+    if (_isDragging && scrollView.contentOffset.y < 0) {
         
-        /*
         // Update the progress arrow
         CGFloat progress = fabs(scrollView.contentOffset.y / REFRESH_HEADER_HEIGHT);
         CGFloat deadZone = 0.3;
         if (progress > deadZone) {
             CGFloat arrowProgress = ((progress - deadZone) / (1 - deadZone));
-            arrow.progress = arrowProgress;
+            _loadingArrow.progress = arrowProgress;
         }
         else {
-            arrow.progress = 0.0;
+            _loadingArrow.progress = 0.0;
         }
         
         // Update the arrow direction and label
@@ -304,14 +299,19 @@
                 // User is scrolling somewhere within the header
             }
         }];
-         */
+    }
+    
+    if (_isDragging && scrollView.contentOffset.y < -1*REFRESH_HEADER_HEIGHT) {
+        _refreshNoticeLabel.text = @"Release to refresh...";
+    } else if(scrollView.contentOffset.y >= -1*REFRESH_HEADER_HEIGHT) {
+        _refreshNoticeLabel.text = @"Pull to refresh...";
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (_isLoading) return;
     _isDragging = NO;
-    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT) {
+    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT && _refreshControlEnabled) {
         // Released above the header
         [self startLoading];
     }
@@ -329,7 +329,7 @@
     
     // hide the arrow and show the spinner
 //    arrow.alpha = 0.0f;
-    [_spinner startAnimating];
+    [_refreshSpinner startAnimating];
     
     _refreshNoticeView.hidden = TRUE;
     
@@ -353,9 +353,8 @@
 
 - (void)stopLoadingComplete {
     // Reset the header
-//    arrow.alpha = 1.0f;
-    [_spinner stopAnimating];
-    _errorHeader.alpha = 0.f;
+    _loadingArrow.alpha = 1.0f;
+    [_refreshSpinner stopAnimating];
 }
 
 - (void)refresh {

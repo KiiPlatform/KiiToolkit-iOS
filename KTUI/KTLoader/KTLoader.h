@@ -19,20 +19,72 @@
 
 #import <UIKit/UIKit.h>
 
+enum {
+    KTLoaderIndicatorSpinner,
+    KTLoaderIndicatorSuccess,
+    KTLoaderIndicatorError
+};
+typedef NSInteger KTLoaderIndicatorType;
+
+enum {
+    KTLoaderDurationIndefinite = 0,
+    KTLoaderDurationAuto = 3000
+};
+typedef NSUInteger KTLoaderIndicatorDuration;
+
+
 /** 
- This class is made for conveniently showing a full-screen loader and not allowing the UI to be interacted with. This is useful when your application is performing an asynchronous operation and the user must wait for completion before continuing their interaction
+ This class is made for conveniently showing a loading indicator that does not allow the UI to be interacted with. This is useful when your application is performing an asynchronous operation and the user must wait for completion before continuing their interaction
  */
 @interface KTLoader : UIView
 
 #pragma mark - Public Static Methods
 
 /**
- Show a loader with a given message and animate in/out option
+ Show a loader with a given message and default extra options. This is the most basic method call available.
+ 
+ @param message The one-line message to display to the user within the loader
+ */
++ (void) showLoader:(NSString*)message;
+
+/**
+ Show a loader with a given message and animate in/out option, the extra options are set to default
  
  @param message The one-line message to display to the user within the loader
  @param animated TRUE if the view should animate in, FALSE otherwise
  */
-+ (void) showLoader:(NSString*)message animated:(BOOL)animated;
++ (void) showLoader:(NSString*)message
+           animated:(BOOL)animated;
+
+/**
+ Show a loader with a given message, animate in/out option and indicator type. The duration is set to default
+ 
+ @param message The one-line message to display to the user within the loader
+ @param animated TRUE if the view should animate in, FALSE otherwise
+ @param indicator One of the KTLoaderIndicatorType options to be displayed within the loader
+ */
++ (void) showLoader:(NSString*)message
+           animated:(BOOL)animated
+      withIndicator:(KTLoaderIndicatorType)indicator;
+
+
+/**
+ Show a loader with a given message, animate in/out option and indicator type. The duration is set to default
+ 
+ @param message The one-line message to display to the user within the loader
+ @param animated TRUE if the view should animate in, FALSE otherwise
+ @param indicator One of the KTLoaderIndicatorType options to be displayed within the loader
+ @param hideInterval Can either be one of the KTLoaderIndicatorDuration options or an integer representing milliseconds
+ */
++ (void) showLoader:(NSString*)message
+           animated:(BOOL)animated
+      withIndicator:(KTLoaderIndicatorType)indicator
+    andHideInterval:(KTLoaderIndicatorDuration)hideInterval;
+
+/**
+ Hide the loader that is currently on the screen with the default animation type
+*/
++ (void) hideLoader;
 
 /**
  Hide any loader that is currently on the screen with an animation option
@@ -40,5 +92,7 @@
  @param animated TRUE if the view should animate out, FALSE otherwise
  */
 + (void) hideLoader:(BOOL)animated;
+
+
 
 @end

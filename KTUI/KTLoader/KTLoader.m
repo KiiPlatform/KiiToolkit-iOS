@@ -19,88 +19,179 @@
 
 #import "KTLoader.h"
 
+#import "UIView+KTUtilities.h"
+#import <QuartzCore/QuartzCore.h>
+
 // Constants
 #define KTLoaderFadeDuration    0.3
 
+@interface KTLoader()
+
+@property (nonatomic, strong) UIView *loader;
+@property (nonatomic, strong) UILabel *loaderLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
+@property (nonatomic, strong) UIImageView *indicator;
+
+@end
+
 @implementation KTLoader
+
+static KTLoader *sharedInstance = nil;
 
 #pragma mark - Display methods
 
-+ (void) showLoader:(NSString*)msg
-           animated:(BOOL)animated
+- (void) initLoader
 {
+    UIWindow *appWindow = [[UIApplication sharedApplication] keyWindow];
     
-    // hide any pre-existing loaders
-    [KTLoader hideLoader:animated];
+    _loader = [[UIView alloc] initWithFrame:appWindow.bounds];
+    _loader.backgroundColor = [UIColor clearColor];
+    _loader.hidden = TRUE;
+    _loader.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    // generate the new loader
-    KTLoader *loader = [[KTLoader alloc] initWithFrame:[[UIApplication sharedApplication] keyWindow].frame];
-    loader.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.9f];
+    UIView *loaderBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    loaderBG.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
+    loaderBG.layer.cornerRadius = 10.0f;
+    loaderBG.layer.shadowColor = [UIColor blackColor].CGColor;
+    loaderBG.center = CGPointMake(_loader.frame.size.width/2, _loader.frame.size.height/2);
+    loaderBG.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    [loaderBG normalizeView];
+    [_loader addSubview:loaderBG];
     
-    // if it should be animated, start with 0.0 alpha so it can be faded in
-    loader.alpha = animated ? 0.0f : 1.0f;
+    _loaderLabel = [[UILabel alloc] initWithFrame:CGRectMake(4, loaderBG.bounds.size.height-50, loaderBG.bounds.size.width-8, 50)];
+    _loaderLabel.backgroundColor = [UIColor clearColor];
+    _loaderLabel.text = @"Loading...";
+    _loaderLabel.textAlignment = NSTextAlignmentCenter;
+    _loaderLabel.textColor = [UIColor whiteColor];
+    _loaderLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    _loaderLabel.numberOfLines = 2;
+    [loaderBG addSubview:_loaderLabel];
+    [_loaderLabel normalizeView];
     
-    // create the message label
-    UILabel *message = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 30)];
-    message.textAlignment = NSTextAlignmentCenter;
-    message.font = [UIFont boldSystemFontOfSize:14.0f];
-    message.textColor = [UIColor whiteColor];
-    message.text = msg;
-    message.backgroundColor = [UIColor clearColor];
-    [loader addSubview:message];
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _spinner.center = CGPointMake(loaderBG.bounds.size.width/2, (loaderBG.bounds.size.height)/3);
+    [loaderBG addSubview:_spinner];
+    [_spinner normalizeView];
     
-    // add an animated activity indicator
-    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activity.center = CGPointMake(160, 256);
-    [loader addSubview:activity];
-    [activity startAnimating];
+    _indicator = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    _indicator.center = _spinner.center;
+    _indicator.contentMode = UIViewContentModeCenter;
+    [loaderBG addSubview:_indicator];
+    [_indicator normalizeView];
     
-    // add the loader to the root window (so it overlays everything)
-    [[[UIApplication sharedApplication] keyWindow] addSubview:loader];
-    
-    // if it should animate in, do so
-    if(animated) {
-        [UIView animateWithDuration:KTLoaderFadeDuration
-                         animations:^{
-                             
-                             // fade in to full opacity
-                             loader.alpha = 1.0f;
-                         }];
-    }
-    
+    // add this view to our window so it overlays everything
+    [appWindow addSubview:_loader];
+
 }
 
++ (void) showLoader:(NSString*)message
+           animated:(BOOL)animated
+      withIndicator:(KTLoaderIndicatorType)indicator
+    andHideInterval:(KTLoaderIndicatorDuration)hideInterval
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if(indicator == KTLoaderIndicatorSpinner) {
+            [[KTLoader sharedInstance].spinner startAnimating];
+            [KTLoader sharedInstance].indicator.hidden = TRUE;
+        } else {
+            
+            NSString *src = (indicator == KTLoaderIndicatorSuccess) ? @"success-indicator" : @"failure-indicator";
+            [KTLoader sharedInstance].indicator.image = [UIImage imageNamed:src];
+            
+            [[KTLoader sharedInstance].spinner stopAnimating];
+            [KTLoader sharedInstance].indicator.hidden = FALSE;
+        }
+        
+        [KTLoader sharedInstance].loaderLabel.text = message;
+        [KTLoader sharedInstance].loader.hidden = FALSE;
+        
+        if(hideInterval > KTLoaderDurationIndefinite) {
+            [KTLoader performSelector:@selector(hideLoader) withObject:nil afterDelay:(hideInterval/1000)];
+        }
+        
+    });
+}
+
++ (void) showLoader:(NSString*)message
+           animated:(BOOL)animated
+      withIndicator:(KTLoaderIndicatorType)indicator
+{
+    [KTLoader showLoader:message
+                animated:animated
+           withIndicator:KTLoaderIndicatorSpinner
+         andHideInterval:KTLoaderDurationIndefinite];
+}
+
++ (void) showLoader:(NSString*)message
+           animated:(BOOL)animated
+{
+    [KTLoader showLoader:message
+                animated:animated
+           withIndicator:KTLoaderIndicatorSpinner];
+}
+
++ (void) showLoader:(NSString*)message
+{
+    [KTLoader showLoader:message
+                animated:TRUE];
+}
 
 + (void) hideLoader:(BOOL)animated
 {
-    
-    // iterate through all subviews of the main window
-    for(UIView *v in [[[UIApplication sharedApplication] keyWindow] subviews]) {
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        // if it's a KTLoader view, we want to hide it
-        if([v isKindOfClass:[KTLoader class]]) {
+        // if the process should be animated
+        if(animated) {
             
-            // if the process should be animated
-            if(animated) {
-                
-                // fade it out nicely
-                [UIView animateWithDuration:KTLoaderFadeDuration
-                                 animations:^{
-                                     v.alpha = 0.0f;
-                                 } completion:^(BOOL finished) {
-                                     [v removeFromSuperview];
-                                 }];
-            }
-            
-            // otherwise, just remove it from the superview
-            else {
-                [v removeFromSuperview];
-            }
-            
-            
+            // fade it out nicely
+            [UIView animateWithDuration:KTLoaderFadeDuration
+                             animations:^{
+                                 [KTLoader sharedInstance].loader.alpha = 0.0f;
+                             } completion:^(BOOL finished) {
+                                 [[KTLoader sharedInstance].loader removeFromSuperview];
+                             }];
         }
+        
+        // otherwise, just remove it from the superview
+        else {
+            [[KTLoader sharedInstance].loader removeFromSuperview];
+        }
+        
+    });
+}
+
++ (void) hideLoader
+{
+    [KTLoader hideLoader:TRUE];
+}
+
+
+/*
+ It is important to leave this empty. This class should persist throughout the
+ lifetime of the app, so any call to dealloc should be ignored
+ */
+- (void) dealloc { }
+
++ (KTLoader*) sharedInstance {
+    if (sharedInstance == nil) {
+        sharedInstance = [[super allocWithZone:NULL] init];
+        [sharedInstance initLoader];
     }
     
+    return sharedInstance;
 }
+
+// We don't want to allocate a new instance, so return the current one.
++ (id)allocWithZone:(NSZone*)zone {
+    return [self sharedInstance];
+}
+
+// Equally, we don't want to generate multiple copies of the singleton.
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
 
 @end

@@ -31,4 +31,9 @@
  */
 - (void) shuffle;
 
+/**
+ Reorganize elements in an array in place
+ */
+- (void) moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
+
 @end

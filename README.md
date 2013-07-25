@@ -9,6 +9,9 @@ Check out the repository and drag/drop any or all the files you'd like to utiliz
 
 > For installation instructions, check out our [Getting Started Guide](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/Getting-Started "Getting Started Guide")
 
+** CocoaPod **
+KiiToolkit is now a CocoaPod! Add `KiiToolkit` to your Podfile.
+
 ### Is there documentation?
 Yes! The Github wiki will be populated with tutorials and examples as we write them; we suggest starting there. You can also get the full [Appledoc](http://gentlebytes.com/appledoc/ "AppleDoc")-style documentation within the repository. Simply checkout the repo and navigate to Documentation/html/. Open the index.html file in your web browser and navigate as needed. 
 

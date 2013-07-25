@@ -120,7 +120,7 @@ static KTLoader *sharedInstance = nil;
 {
     [KTLoader showLoader:message
                 animated:animated
-           withIndicator:KTLoaderIndicatorSpinner
+           withIndicator:indicator
          andHideInterval:KTLoaderDurationIndefinite];
 }
 

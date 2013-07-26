@@ -28,40 +28,21 @@
 #define ERROR_DISPLAY_TIME      5000
 
 @interface KTTableViewController () {
-    KiiQuery *_query;
+
     KiiQuery *_nextQuery;
     NSMutableArray *_results;
     
-    int _pageSize;
-    BOOL _paginationEnabled;
-    BOOL _refreshControlEnabled;
     BOOL _autoHandleErrors;
     
     BOOL _isLoading;
     BOOL _isDragging;
     
     UIView *_refreshHeader;
-    UIActivityIndicatorView *_refreshSpinner;
-
-    UIView *_refreshNoticeView;
-    UILabel *_refreshNoticeLabel;
-    CKRefreshArrowView *_loadingArrow;
-
 }
 
 @end
 
 @implementation KTTableViewController
-
-@synthesize query = _query;
-
-@synthesize pageSize = _pageSize;
-@synthesize paginationEnabled = _paginationEnabled;
-@synthesize refreshControlEnabled = _refreshControlEnabled;
-@synthesize refreshNoticeView = _refreshNoticeView;
-@synthesize refreshSpinner = _refreshSpinner;
-@synthesize refreshNoticeLabel = _refreshNoticeLabel;
-@synthesize loadingArrow = _loadingArrow;
 
 - (void) setRefreshControlEnabled:(BOOL)refreshControlEnabled
 {

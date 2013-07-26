@@ -25,15 +25,12 @@
     UIView *_standardBackground;
     UIView *_touchedBackground;
     
-    UIColor *_borderColor;
     NSMutableArray *_backgroundColors;
 }
 
 @end
 
 @implementation KTButton
-
-@synthesize borderColor = _borderColor;
 
 #pragma mark - Setters
 

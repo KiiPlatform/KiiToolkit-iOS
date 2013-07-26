@@ -27,16 +27,7 @@
 #define kCornerRadius               4.0f
 #define kProgressAnimationDuration  0.1f
 
-@interface KTProgressBar() {
-    double _progress;
-    UIView *_subProgressView;
-}
-@end
-
 @implementation KTProgressBar
-
-@synthesize progress = _progress;
-@synthesize subProgressView = _subProgressView;
 
 - (void) setProgress:(double)progress
             animated:(BOOL)animated

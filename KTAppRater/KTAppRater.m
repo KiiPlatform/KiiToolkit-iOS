@@ -31,21 +31,7 @@
 #define KTAPPRATER_DEFAULT_MINIMUM_USES_BEFORE_DISPLAY  10
 #define KTAPPRATER_DEFAULT_DAYS_BEFORE_REMINDING        2
 
-@interface KTAppRater()  {
-    NSString *_appID;
-    
-    int _minimumDaysBeforeDisplay;
-    int _minimumUsesBeforeDisplay;
-    int _daysBeforeReminding;
-    
-    NSString *_alertMessage;
-    NSString *_alertTitle;
-    
-    NSString *_alertDeclineButtonTitle;
-    NSString *_alertRateNowButtonTitle;
-    NSString *_alertReminderButtonTitle;
-
-}
+@interface KTAppRater()
 
 @property (nonatomic, strong) NSString *appID;
 
@@ -68,18 +54,7 @@
 
 @implementation KTAppRater
 
-@synthesize appID = _appID;
-@synthesize minimumDaysBeforeDisplay = _minimumDaysBeforeDisplay;
-@synthesize minimumUsesBeforeDisplay = _minimumUsesBeforeDisplay;
-@synthesize daysBeforeReminding = _daysBeforeReminding;
-@synthesize alertMessage = _alertMessage;
-@synthesize alertTitle = _alertTitle;
-@synthesize alertDeclineButtonTitle = _alertDeclineButtonTitle;
-@synthesize alertRateNowButtonTitle = _alertRateNowButtonTitle;
-@synthesize alertReminderButtonTitle = _alertReminderButtonTitle;
-
 static KTAppRater *sharedInstance = nil;
-
 
 + (void) setAlertMessage:(NSString*)alertMessage
 {

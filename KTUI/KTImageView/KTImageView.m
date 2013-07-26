@@ -26,16 +26,7 @@
 #import "UIView+KTUtilities.h"
 #import "KTProgressBar.h"
 
-@interface KTImageView() {
-    KiiFile *_imageFile;
-    KTProgressBar *_progressIndicator;
-}
-@end
-
 @implementation KTImageView
-
-@synthesize imageFile = _imageFile;
-@synthesize progressIndicator = _progressIndicator;
 
 - (void) showWithProgress:(KTImageViewProgressBlock)progressBlock
             andCompletion:(KTImageViewCompletionBlock)completionBlock

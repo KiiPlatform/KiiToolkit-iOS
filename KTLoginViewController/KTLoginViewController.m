@@ -26,22 +26,6 @@
 
 @interface KTLoginViewController () {
     CGFloat _originalY;
-    
-    KTTextField *_usernameField;
-    KTTextField *_passwordField;
-    
-    UIButton *_closeButton;
-    KTButton *_registerButton;
-    KTButton *_loginButton;
-    UIButton *_forgotButton;
-    UILabel *_noAccountLabel;
-    
-    UIImageView *_titleImage;
-    UIImageView *_backgroundImage;
-    
-    KTRegistrationViewController *_registrationView;
-    KTForgotPasswordViewController *_forgotPasswordView;
-
 }
 
 - (void) shiftView:(UITextField*)textField;
@@ -49,20 +33,6 @@
 @end
 
 @implementation KTLoginViewController
-
-// synthesize our UI elements
-@synthesize usernameField = _usernameField;
-@synthesize passwordField = _passwordField;
-@synthesize titleImage = _titleImage;
-@synthesize backgroundImage = _backgroundImage;
-@synthesize loginButton = _loginButton;
-@synthesize registerButton = _registerButton;
-@synthesize forgotButton = _forgotButton;
-@synthesize noAccountLabel = _noAccountLabel;
-@synthesize closeButton = _closeButton;
-@synthesize registrationView = _registrationView;
-@synthesize forgotPasswordView = _forgotPasswordView;
-
 
 #pragma mark - Action methods
 

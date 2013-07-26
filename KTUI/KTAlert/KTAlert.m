@@ -31,7 +31,6 @@
 
 @interface KTAlert() {
     KTAlertType _type;
-    NSString *_message;
     NSUInteger _duration;
 }
 
@@ -40,8 +39,6 @@
 @end
 
 @implementation KTAlert
-
-@synthesize message = _message;
 
 #pragma mark - Subclass stubs
 /* Stubbed.. should be overriden by subclasses */

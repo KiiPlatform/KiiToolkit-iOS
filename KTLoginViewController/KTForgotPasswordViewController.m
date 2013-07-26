@@ -25,27 +25,7 @@
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface KTForgotPasswordViewController() {
-    
-    KTTextField *_userIdentifierField;
-    KTButton *_sendResetButton;
-    
-    UIButton *_closeButton;
-    UIImageView *_titleImage;
-    UIImageView *_backgroundImage;
-
-}
-
-@end
-
 @implementation KTForgotPasswordViewController
-
-// synth our UI elements
-@synthesize userIdentifierField = _userIdentifierField;
-@synthesize sendResetButton = _sendResetButton;
-@synthesize closeButton = _closeButton;
-@synthesize titleImage = _titleImage;
-@synthesize backgroundImage = _backgroundImage;
 
 #pragma mark - Action methods
 

@@ -29,21 +29,6 @@
 @interface KTRegistrationViewController () {
     UIScrollView *_scrollContainer;
     CGFloat _originalY;
-    
-    KTTextField *_loginNameField;
-    KTTextField *_emailAddressField;
-    KTTextField *_phoneNumberField;
-    KTTextField *_displayNameField;
-    KTTextField *_passwordField;
-    
-    UIButton *_closeButton;
-    KTButton *_registerButton;
-    
-    UIImageView *_titleImage;
-    UIImageView *_backgroundImage;
-    
-    NSUInteger _displayFields;
-
 }
 
 - (void) drawView;
@@ -53,16 +38,6 @@
 
 @implementation KTRegistrationViewController
 
-// synth our UI elements
-@synthesize loginNameField = _loginNameField;
-@synthesize emailAddressField = _emailAddressField;
-@synthesize displayNameField = _displayNameField;
-@synthesize passwordField = _passwordField;
-@synthesize titleImage = _titleImage;
-@synthesize backgroundImage = _backgroundImage;
-@synthesize registerButton = _registerButton;
-@synthesize closeButton = _closeButton;
-@synthesize displayFields = _displayFields;
 
 #pragma mark - Overridden setter methods
 

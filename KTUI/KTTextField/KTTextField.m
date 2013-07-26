@@ -25,19 +25,11 @@
 #define KTGlowOpacity           0.9f
 #define KTAnimationDuration     0.3f
 
-@interface KTTextField() {
-    UIColor *_borderColor;
-    BOOL _glows;
-}
-
+@interface KTTextField()
 - (void) redraw;
-
 @end
 
 @implementation KTTextField
-
-@synthesize borderColor = _borderColor;
-@synthesize glows = _glows;
 
 #pragma mark - Customized setters
 - (void) setBorderColor:(UIColor *)borderColor {

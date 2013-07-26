@@ -22,15 +22,15 @@
 @class KTCircularProgressIndicator;
 
 enum {
-    KTProgressBarTypeBarDefault,
-    KTProgressBarTypeCircular
+    KTProgressIndicatorTypeBarDefault,
+    KTProgressIndicatorTypeCircular
 };
-typedef NSInteger KTProgressBarType;
+typedef NSInteger KTProgressIndicatorType;
 
 /**
  A UI element that displays a progress bar. This class will be skinnable with a few default types to get you started. It is meant to be a nicer-looking, more customizable solution to the standard iOS UIProgressView
  */
-@interface KTProgressBar : UIView
+@interface KTProgressIndicator : UIView
 
 /** The current progress value of the bar [0, 1] **/
 @property (nonatomic, assign) double progress;
@@ -69,6 +69,6 @@ typedef NSInteger KTProgressBarType;
  @return The KTProgressBar object
  */
 - (id) initWithFrame:(CGRect)frame
-             andType:(KTProgressBarType)type;
+             andType:(KTProgressIndicatorType)type;
 
 @end

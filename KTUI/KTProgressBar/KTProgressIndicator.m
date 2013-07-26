@@ -17,7 +17,7 @@
 //
 //
 
-#import "KTProgressBar.h"
+#import "KTProgressIndicator.h"
 
 #import "KTCircularProgressIndicator.h"
 #import <QuartzCore/QuartzCore.h>
@@ -28,20 +28,20 @@
 #define kCornerRadius               4.0f
 #define kProgressAnimationDuration  0.1f
 
-@interface KTProgressBar() {
-    KTProgressBarType _type;
+@interface KTProgressIndicator() {
+    KTProgressIndicatorType _type;
 }
 
 @end
 
-@implementation KTProgressBar
+@implementation KTProgressIndicator
 
 - (void) setProgress:(double)progress
             animated:(BOOL)animated
 {
     _progress = progress;
     
-    if(_type == KTProgressBarTypeBarDefault) {
+    if(_type == KTProgressIndicatorTypeBarDefault) {
         // create the new frame based on the progress value
         CGRect frame = _subProgressView.frame;
         frame.size.width = _progress * (self.frame.size.width - kPadding * 2);
@@ -68,7 +68,7 @@
         }
     }
     
-    else if(_type == KTProgressBarTypeCircular) {
+    else if(_type == KTProgressIndicatorTypeCircular) {
         _circularProgressIndicator.progress = _progress;
     }
     
@@ -81,7 +81,7 @@
 }
 
 - (id) initWithFrame:(CGRect)frame
-             andType:(KTProgressBarType)type
+             andType:(KTProgressIndicatorType)type
 {
     
     self = [super initWithFrame:frame];
@@ -91,7 +91,7 @@
         self.backgroundColor = [UIColor clearColor];
         _type = type;
 
-        if(type == KTProgressBarTypeBarDefault) {
+        if(type == KTProgressIndicatorTypeBarDefault) {
             
             // set up our default values
             self.layer.borderColor = [UIColor colorWithWhite:0.6f alpha:0.8f].CGColor;
@@ -105,7 +105,7 @@
             [self addSubview:_subProgressView];
         }
         
-        else if(type == KTProgressBarTypeCircular) {
+        else if(type == KTProgressIndicatorTypeCircular) {
             _circularProgressIndicator = [[KTCircularProgressIndicator alloc] initWithFrame:self.bounds];
             [self addSubview:_circularProgressIndicator];
         }
@@ -120,7 +120,7 @@
 
 - (id) initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame andType:KTProgressBarTypeBarDefault];
+    return [self initWithFrame:frame andType:KTProgressIndicatorTypeBarDefault];
 }
 
 @end

@@ -28,6 +28,7 @@
 #import "KTTextField.h"
 #import "KTImageView.h"
 #import "KTProgressBar.h"
+#import "KTCircularProgressIndicator.h"
 
 // set some defaults that we use throughout the UI Framework
 #define KT_KEYBOARD_ANIMATION_TIME     0.28f

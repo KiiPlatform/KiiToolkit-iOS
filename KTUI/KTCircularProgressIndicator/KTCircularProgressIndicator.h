@@ -19,8 +19,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KTLoaderProgressIndicator : UIView
+@interface KTCircularProgressIndicator : UIView
 
+/** The progress amount to use from [0,1] with 1 being a 'full pie' */
 @property (nonatomic, assign) double progress;
+
+/** The stroke color of the 'pie' - default is [UIColor whiteColor] */
+@property (nonatomic, strong) UIColor *strokeColor;
+
+/** The fill color of the 'pie' - default is [UIColor whiteColor] */
+@property (nonatomic, strong) UIColor *fillColor;
 
 @end

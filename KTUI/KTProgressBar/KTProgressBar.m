@@ -19,6 +19,7 @@
 
 #import "KTProgressBar.h"
 
+#import "KTCircularProgressIndicator.h"
 #import <QuartzCore/QuartzCore.h>
 
 // set some defaults
@@ -27,6 +28,12 @@
 #define kCornerRadius               4.0f
 #define kProgressAnimationDuration  0.1f
 
+@interface KTProgressBar() {
+    KTProgressBarType _type;
+}
+
+@end
+
 @implementation KTProgressBar
 
 - (void) setProgress:(double)progress
@@ -34,29 +41,35 @@
 {
     _progress = progress;
     
-    // create the new frame based on the progress value
-    CGRect frame = _subProgressView.frame;
-    frame.size.width = _progress * (self.frame.size.width - kPadding * 2);
-    
-    // remove any existing animations so they aren't stacked
-    [_subProgressView.layer removeAllAnimations];
-    
-    // if the method asked for animation
-    if(animated) {
+    if(_type == KTProgressBarTypeBarDefault) {
+        // create the new frame based on the progress value
+        CGRect frame = _subProgressView.frame;
+        frame.size.width = _progress * (self.frame.size.width - kPadding * 2);
         
-        // slide the bar in a smooth animation
-        [UIView animateWithDuration:kProgressAnimationDuration
-                              delay:0.0f
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                             _subProgressView.frame = frame;
-                         }
-                         completion:nil];
+        // remove any existing animations so they aren't stacked
+        [_subProgressView.layer removeAllAnimations];
+        
+        // if the method asked for animation
+        if(animated) {
+            
+            // slide the bar in a smooth animation
+            [UIView animateWithDuration:kProgressAnimationDuration
+                                  delay:0.0f
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 _subProgressView.frame = frame;
+                             }
+                             completion:nil];
+        }
+        
+        // otherwise, just update the frame immediately
+        else {
+            _subProgressView.frame = frame;
+        }
     }
     
-    // otherwise, just update the frame immediately
-    else {
-        _subProgressView.frame = frame;
+    else if(_type == KTProgressBarTypeCircular) {
+        _circularProgressIndicator.progress = _progress;
     }
     
 }
@@ -68,24 +81,34 @@
 }
 
 - (id) initWithFrame:(CGRect)frame
+             andType:(KTProgressBarType)type
 {
     
     self = [super initWithFrame:frame];
     
     if(self) {
         
-        // set up our default values
         self.backgroundColor = [UIColor clearColor];
-        self.layer.borderColor = [UIColor colorWithWhite:0.6f alpha:0.8f].CGColor;
-        self.layer.borderWidth = kBorderWidth;
-//        self.layer.cornerRadius = kCornerRadius;
+        _type = type;
+
+        if(type == KTProgressBarTypeBarDefault) {
+            
+            // set up our default values
+            self.layer.borderColor = [UIColor colorWithWhite:0.6f alpha:0.8f].CGColor;
+            self.layer.borderWidth = kBorderWidth;
+            
+            // create the actual sliding view inside the container
+            CGRect subFrame = CGRectMake(kPadding, kPadding, frame.size.width-kPadding*2, frame.size.height-kPadding*2);
+            _subProgressView = [[UIView alloc] initWithFrame:subFrame];
+            _subProgressView.backgroundColor = [UIColor colorWithWhite:0.7f alpha:0.8f];
+            //        _subProgressView.layer.cornerRadius = kCornerRadius/2;
+            [self addSubview:_subProgressView];
+        }
         
-        // create the actual sliding view inside the container
-        CGRect subFrame = CGRectMake(kPadding, kPadding, frame.size.width-kPadding*2, frame.size.height-kPadding*2);
-        _subProgressView = [[UIView alloc] initWithFrame:subFrame];
-        _subProgressView.backgroundColor = [UIColor colorWithWhite:0.7f alpha:0.8f];
-//        _subProgressView.layer.cornerRadius = kCornerRadius/2;
-        [self addSubview:_subProgressView];
+        else if(type == KTProgressBarTypeCircular) {
+            _circularProgressIndicator = [[KTCircularProgressIndicator alloc] initWithFrame:self.bounds];
+            [self addSubview:_circularProgressIndicator];
+        }
         
         // set the default value to 0
         [self setProgress:0.0f animated:FALSE];
@@ -93,6 +116,11 @@
     
     return self;
     
+}
+
+- (id) initWithFrame:(CGRect)frame
+{
+    return [self initWithFrame:frame andType:KTProgressBarTypeBarDefault];
 }
 
 @end

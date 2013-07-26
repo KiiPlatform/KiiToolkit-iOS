@@ -20,6 +20,7 @@
 #import "KTLoader.h"
 
 #import "UIView+KTUtilities.h"
+#import "KTLoaderProgressIndicator.h"
 #import <QuartzCore/QuartzCore.h>
 
 // Constants
@@ -30,6 +31,7 @@
 @property (nonatomic, strong) UIView *loader;
 @property (nonatomic, strong) UILabel *loaderLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
+@property (nonatomic, strong) KTLoaderProgressIndicator *progressIndicator;
 @property (nonatomic, strong) UIImageView *indicator;
 
 @end
@@ -79,6 +81,11 @@ static KTLoader *sharedInstance = nil;
     [loaderBG addSubview:_indicator];
     [_indicator normalizeView];
     
+    _progressIndicator = [[KTLoaderProgressIndicator alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    _progressIndicator.center = _spinner.center;
+    [loaderBG addSubview:_progressIndicator];
+    [_progressIndicator normalizeView];
+    
     // add this view to our window so it overlays everything
     [appWindow addSubview:_loader];
 
@@ -95,6 +102,15 @@ static KTLoader *sharedInstance = nil;
         if(indicator == KTLoaderIndicatorSpinner) {
             [[KTLoader sharedInstance].spinner startAnimating];
             [KTLoader sharedInstance].indicator.hidden = TRUE;
+            [KTLoader sharedInstance].progressIndicator.hidden = TRUE;
+        } else if(indicator == KTLoaderIndicatorProgress){
+            
+            [[KTLoader sharedInstance].spinner stopAnimating];
+            [KTLoader sharedInstance].indicator.hidden = TRUE;
+            
+            [[KTLoader sharedInstance].progressIndicator setProgress:0.0f];
+            [KTLoader sharedInstance].progressIndicator.hidden = FALSE;
+            
         } else {
             
             NSString *src = (indicator == KTLoaderIndicatorSuccess) ? @"success-indicator" : @"failure-indicator";
@@ -102,6 +118,7 @@ static KTLoader *sharedInstance = nil;
             
             [[KTLoader sharedInstance].spinner stopAnimating];
             [KTLoader sharedInstance].indicator.hidden = FALSE;
+            [KTLoader sharedInstance].progressIndicator.hidden = TRUE;
         }
         
         [KTLoader sharedInstance].loaderLabel.text = message;
@@ -167,6 +184,12 @@ static KTLoader *sharedInstance = nil;
     [KTLoader hideLoader:TRUE];
 }
 
++ (void) setProgress:(double)progress
+{
+    if([KTLoader sharedInstance].progressIndicator) {
+        [[KTLoader sharedInstance].progressIndicator setProgress:progress];
+    }
+}
 
 /*
  It is important to leave this empty. This class should persist throughout the

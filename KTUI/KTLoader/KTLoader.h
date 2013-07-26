@@ -22,7 +22,8 @@
 enum {
     KTLoaderIndicatorSpinner,
     KTLoaderIndicatorSuccess,
-    KTLoaderIndicatorError
+    KTLoaderIndicatorError,
+    KTLoaderIndicatorProgress
 };
 typedef NSInteger KTLoaderIndicatorType;
 
@@ -93,6 +94,11 @@ typedef NSUInteger KTLoaderIndicatorDuration;
  */
 + (void) hideLoader:(BOOL)animated;
 
-
+/**
+ Applicable only to the KTLoaderIndicatorType KTLoaderIndicatorProgress, this will show a circular loader with progress
+ 
+ @param progress A value from [0,1] that indicates the progress
+ */
++ (void) setProgress:(double)progress;
 
 @end

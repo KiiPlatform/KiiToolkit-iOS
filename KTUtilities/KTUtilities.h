@@ -24,5 +24,7 @@
 
 #import "UIColor+KTUtilities.h"
 #import "UIView+KTUtilities.h"
+#import "NSString+KTUtilities.h"
+#import "UIImage+KTUtilities.h"
 #import "NSMutableArray+KTUtilities.h"
 #import "KTNetworkingUtilities.h"

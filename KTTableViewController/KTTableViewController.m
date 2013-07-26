@@ -30,7 +30,6 @@
 @interface KTTableViewController () {
     KiiQuery *_query;
     KiiQuery *_nextQuery;
-    KiiBucket *_bucket;
     NSMutableArray *_results;
     
     int _pageSize;
@@ -55,7 +54,6 @@
 @implementation KTTableViewController
 
 @synthesize query = _query;
-@synthesize bucket = _bucket;
 
 @synthesize pageSize = _pageSize;
 @synthesize paginationEnabled = _paginationEnabled;
@@ -84,36 +82,74 @@
         
         // set the limit
         localQuery.limit = _pageSize;
-                
-        [_bucket executeQuery:localQuery
-                    withBlock:^(KiiQuery *bucketQuery, KiiBucket *bucket, NSArray *results, KiiQuery *nextQuery, NSError *error) {
-                                                
-                        if(error == nil) {
-                                                        
-                            _results = [results mutableCopy];
+        
+        if([_bucket isKindOfClass:[KiiBucket class]]) {
 
-                            [self doneLoading];
-                            [self.tableView reloadData];
+            [_bucket executeQuery:localQuery
+                        withBlock:^(KiiQuery *bucketQuery, KiiBucket *bucket, NSArray *results, KiiQuery *nextQuery, NSError *error) {
                             
-                            _nextQuery = nextQuery;
-                            
-                        } else {
-                            
-                            [self doneLoading];
-
-                            if(_autoHandleErrors) {
-                                [KTAlert showAlert:KTAlertTypeBar
-                                       withMessage:@"Unable to load items"
-                                       andDuration:KTAlertDurationLong];
+                            if(error == nil) {
+                                
+                                _results = [results mutableCopy];
+                                
+                                [self doneLoading];
+                                [self.tableView reloadData];
+                                
+                                _nextQuery = nextQuery;
+                                
+                            } else {
+                                
+                                [self doneLoading];
+                                
+                                if(_autoHandleErrors) {
+                                    [KTAlert showAlert:KTAlertTypeBar
+                                           withMessage:@"Unable to load items"
+                                           andDuration:KTAlertDurationLong];
+                                }
+                                
                             }
                             
-                        }
+                            if([self respondsToSelector:@selector(tableDidFinishLoading:)]) {
+                                [self performSelector:@selector(tableDidFinishLoading:) withObject:error];
+                            }
+                            
+                        }];
 
-                        if([self respondsToSelector:@selector(tableDidFinishLoading:)]) {
-                            [self performSelector:@selector(tableDidFinishLoading:) withObject:error];
-                        }
+        } else if([_bucket isKindOfClass:[KiiFileBucket class]]) {
 
-                    }];
+            [(KiiFileBucket*)_bucket executeQuery:localQuery
+                                        withBlock:^(KiiQuery *query, KiiFileBucket *bucket, NSArray *results, NSError *error) {
+                            
+                            if(error == nil) {
+                                
+                                _results = [results mutableCopy];
+                                
+                                [self doneLoading];
+                                [self.tableView reloadData];
+                                                                
+                            } else {
+                                
+                                [self doneLoading];
+                                
+                                if(_autoHandleErrors) {
+                                    [KTAlert showAlert:KTAlertTypeBar
+                                           withMessage:@"Unable to load items"
+                                           andDuration:KTAlertDurationLong];
+                                }
+                                
+                            }
+                            
+                            if([self respondsToSelector:@selector(tableDidFinishLoading:)]) {
+                                [self performSelector:@selector(tableDidFinishLoading:) withObject:error];
+                            }
+                            
+                        }];
+
+        } else {
+            // throw exception
+            [NSException raise:@"Unable to query bucket -- must be a KiiBucket or KiiFileBucket" format:nil];
+        }
+        
     } else {
         
         if(_autoHandleErrors) {
@@ -365,7 +401,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
-              cellForKiiObject:(KiiObject*)object
+              cellForKiiObject:(id)object
                    atIndexPath:(NSIndexPath*)indexPath
 {
     // stubbed, should be overriden by subclass

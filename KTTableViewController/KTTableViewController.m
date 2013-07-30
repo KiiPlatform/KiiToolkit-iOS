@@ -194,8 +194,10 @@
     
     _refreshNoticeView = [[UIView alloc] initWithFrame:_refreshHeader.bounds];
     
-    _refreshNoticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, _refreshHeader.bounds.size.width-60, REFRESH_HEADER_HEIGHT)];
+    _refreshNoticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, _refreshHeader.bounds.size.width-44, REFRESH_HEADER_HEIGHT)];
     _refreshNoticeLabel.backgroundColor = [UIColor clearColor];
+    _refreshNoticeLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+    _refreshNoticeLabel.shadowOffset = CGSizeMake(1.0, 1.0f);
     _refreshNoticeLabel.text = @"Pull to refresh...";
     _refreshNoticeLabel.textAlignment = NSTextAlignmentLeft;
     

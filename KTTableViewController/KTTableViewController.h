@@ -66,7 +66,7 @@
 /** A subview of refreshNoticeView, this label displays the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
 @property (nonatomic, strong) UILabel *refreshNoticeLabel;
 
-/** A subview of refreshNoticeView, this is the circular arrow that displays alongside the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
+/** A subview of refreshNoticeView, this is the arrow that displays alongside the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
 @property (nonatomic, strong) CKRefreshArrowView *loadingArrow;
 
 /** Shown when the table view is refreshing, use this property to customize color, etc. */

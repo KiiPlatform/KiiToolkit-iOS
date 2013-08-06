@@ -29,7 +29,7 @@
 /**
  A mandatory method call, this sets up KTAppRater for your app
  
- @param appID The numeric application ID for your app, assigned by iTunes and can be found in your app's page on iTunes Connect
+ @param appId The numeric application ID for your app, assigned by iTunes and can be found in your app's page on iTunes Connect
  */
 + (void) configureAppID:(NSString*)appId;
 

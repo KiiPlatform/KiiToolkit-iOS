@@ -33,6 +33,9 @@
 
 /**
  Reorganize elements in an array in place
+ 
+ @param from The index to move the object from
+ @param to The index to move the object to
  */
 - (void) moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
 

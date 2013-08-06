@@ -19,16 +19,27 @@
 
 #import <UIKit/UIKit.h>
 
+@class KTCircularProgressIndicator;
+
+enum {
+    KTProgressIndicatorTypeBarDefault,
+    KTProgressIndicatorTypeCircular
+};
+typedef NSInteger KTProgressIndicatorType;
+
 /**
  A UI element that displays a progress bar. This class will be skinnable with a few default types to get you started. It is meant to be a nicer-looking, more customizable solution to the standard iOS UIProgressView
  */
-@interface KTProgressBar : UIView
+@interface KTProgressIndicator : UIView
 
 /** The current progress value of the bar [0, 1] **/
 @property (nonatomic, assign) double progress;
 
 /** The inside view (the actual progress bar, inside the container) */
 @property (nonatomic, strong) UIView *subProgressView;
+
+/** Applicable only to the KTProgressBarType KTProgressBarTypeCircular, access this object to update the parameters (colors, etc) of the progress indicator */
+@property (nonatomic, strong) KTCircularProgressIndicator *circularProgressIndicator;
 
 /**
  Set the progress with bar growth animation
@@ -39,5 +50,25 @@
  */
 - (void) setProgress:(double)progress
             animated:(BOOL)animated;
+
+/** 
+ Create a KTProgressBar with the default type (KTProgressBarTypeBarDefault)
+ 
+ If you want to customize the progress bar type, use the initWithFrame:andType: method
+ 
+ @param frame The frame that should be used by the KTProgressBar
+ @return The KTProgressBar object
+ */
+- (id) initWithFrame:(CGRect)frame;
+
+/**
+ Create a KTProgressBar with the default type (KTProgressBarTypeBarDefault)
+ 
+ @param frame The frame that should be used by the KTProgressBar
+ @param type The KTProgressBarType to use for this indicator
+ @return The KTProgressBar object
+ */
+- (id) initWithFrame:(CGRect)frame
+             andType:(KTProgressIndicatorType)type;
 
 @end

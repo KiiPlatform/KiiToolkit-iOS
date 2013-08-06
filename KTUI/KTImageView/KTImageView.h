@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class KiiFile, KTProgressBar;
+@class KiiFile, KTProgressIndicator;
 
 /* Block definitions for this class */
 typedef void (^KTImageViewProgressBlock)(KiiFile *file, double progress);
@@ -34,7 +34,7 @@ typedef void (^KTImageViewCompletionBlock)(KiiFile *file, NSError *error);
 @property (nonatomic, strong) KiiFile *imageFile;
 
 /** The progress indicator, visible and on by default */
-@property (nonatomic, strong) KTProgressBar *progressIndicator;
+@property (nonatomic, strong) KTProgressIndicator *progressIndicator;
 
 /**
  Initialize a KTImageView object

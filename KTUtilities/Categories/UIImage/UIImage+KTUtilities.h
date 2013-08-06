@@ -19,8 +19,18 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ Utility methods for NSString to make commonly-needed functionality more efficient and reusable.
+ */
 @interface UIImage (KTUtilities)
 
+/**
+ A resize method for UIImage, this will use the 'scale-to-fill' method of scaling. i.e. the image will be trimmed in order to completely fill the newSize.
+ 
+ @param image The original image which you'd like to scale
+ @param newSize The constrained size you'd like the image scaled to
+ @return A UIImage object with the scaled image
+ */
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 @end

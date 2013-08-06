@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KTAlert Class Reference</title>
+		<title>NSString(KTUtilities) Category Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
@@ -16,7 +16,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KTAlert Class Reference</h1>
+				<h1 class="hideInXcode">NSString(KTUtilities) Category Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -41,22 +41,20 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/hideAlerts">&nbsp;&nbsp;&nbsp;&nbsp;+ hideAlerts</option>
+	<option value="//api/name/charactersForSet:">&nbsp;&nbsp;&nbsp;&nbsp;+ charactersForSet:</option>
 	
-	<option value="//api/name/showAlert:withMessage:andDuration:">&nbsp;&nbsp;&nbsp;&nbsp;+ showAlert:withMessage:andDuration:</option>
+	<option value="//api/name/randomString:">&nbsp;&nbsp;&nbsp;&nbsp;+ randomString:</option>
 	
-	<option value="//api/name/showPersistentAlert:withMessage:">&nbsp;&nbsp;&nbsp;&nbsp;+ showPersistentAlert:withMessage:</option>
+	<option value="//api/name/randomString:withCharacterSet:">&nbsp;&nbsp;&nbsp;&nbsp;+ randomString:withCharacterSet:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/dismiss">&nbsp;&nbsp;&nbsp;&nbsp;- dismiss</option>
+	<option value="//api/name/containsCharacter:">&nbsp;&nbsp;&nbsp;&nbsp;- containsCharacter:</option>
 	
-	<option value="//api/name/initWithType:withMessage:andDuration:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithType:withMessage:andDuration:</option>
-	
-	<option value="//api/name/show">&nbsp;&nbsp;&nbsp;&nbsp;- show</option>
+	<option value="//api/name/containsString:">&nbsp;&nbsp;&nbsp;&nbsp;- containsString:</option>
 	
 	
 	
@@ -84,11 +82,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/hideAlerts">hideAlerts</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/charactersForSet:">charactersForSet:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showAlert:withMessage:andDuration:">showAlert:withMessage:andDuration:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/randomString:">randomString:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showPersistentAlert:withMessage:">showPersistentAlert:withMessage:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/randomString:withCharacterSet:">randomString:withCharacterSet:</a></span></li>
 	
 </ul></li>
 
@@ -96,11 +94,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dismiss">dismiss</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/containsCharacter:">containsCharacter:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithType:withMessage:andDuration:">initWithType:withMessage:andDuration:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/show">show</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/containsString:">containsString:</a></span></li>
 	
 </ul></li>
 
@@ -109,7 +105,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KTAlert Class Reference" name="top"></a>
+				<a title="NSString(KTUtilities) Category Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -118,18 +114,15 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KTAlert Class Reference</h1>
+						<h1 class="title title-header">NSString(KTUtilities) Category Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">UIView</td>
-</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KTAlert.h<br />KTAlert.m</td>
+	<td class="specification-value">NSString+KTUtilities.h<br />NSString+KTUtilities.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -139,7 +132,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A UI element that displays an alert to the user. Differing from UIAlertView, this class is meant to <a href="#//api/name/show">show</a> nice-looking and/or more subtle, less invasive alerts.</p>
+						<p>Utility methods for NSString to make commonly-needed functionality more efficient and reusable.</p>
 					</div>
 					
 					
@@ -157,37 +150,31 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/showAlert:withMessage:andDuration:">+&nbsp;showAlert:withMessage:andDuration:</a></code>
+		<code><a href="#//api/name/randomString:">+&nbsp;randomString:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/showPersistentAlert:withMessage:">+&nbsp;showPersistentAlert:withMessage:</a></code>
+		<code><a href="#//api/name/randomString:withCharacterSet:">+&nbsp;randomString:withCharacterSet:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/hideAlerts">+&nbsp;hideAlerts</a></code>
+		<code><a href="#//api/name/containsString:">&ndash;&nbsp;containsString:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithType:withMessage:andDuration:">&ndash;&nbsp;initWithType:withMessage:andDuration:</a></code>
+		<code><a href="#//api/name/containsCharacter:">&ndash;&nbsp;containsCharacter:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/show">&ndash;&nbsp;show</a></code>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/dismiss">&ndash;&nbsp;dismiss</a></code>
+		<code><a href="#//api/name/charactersForSet:">+&nbsp;charactersForSet:</a></code>
 	</span>
 	
 	
@@ -207,59 +194,18 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/hideAlerts" title="hideAlerts"></a>
-	<h3 class="subsubtitle method-title">hideAlerts</h3>
+	<a name="//api/name/charactersForSet:" title="charactersForSet:"></a>
+	<h3 class="subsubtitle method-title">charactersForSet:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Called at any time, this method will remove all alerts from view</p>
+		<p>Retrieve the characters within a given KTCharacterSet</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (void)hideAlerts</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Called at any time, this method will remove all alerts from view</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTAlert.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/showAlert:withMessage:andDuration:" title="showAlert:withMessage:andDuration:"></a>
-	<h3 class="subsubtitle method-title">showAlert:withMessage:andDuration:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Shows an alert with a given type, message and duration</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>+ (void)showAlert:(KTAlertType)<em>type</em> withMessage:(NSString *)<em>message</em> andDuration:(NSUInteger)<em>durationInMillis</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (NSString *)charactersForSet:(KTCharacterSet)<em>set</em></code></div>
 
     
 	
@@ -267,23 +213,18 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>type</em></dt>
-			<dd><p>The type of alert to display. See KTAlertType and KTAlert subclasses for full descriptions</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>message</em></dt>
-			<dd><p>The message to display to the user. Depending on the type, be careful of the message length - it may be truncated in some alert types</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>durationInMillis</em></dt>
-			<dd><p>How long to <a href="#//api/name/show">show</a> the alert. Set to 0 for a persistent alert that you remove manually</p></dd>
+			<dt><em>set</em></dt>
+			<dd><p>The character set to retrieve</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The items within the character set</p>
+	</div>
 	
 	
 	
@@ -291,7 +232,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Shows an alert with a given type, message and duration</p>
+		<p>Retrieve the characters within a given KTCharacterSet</p>
 	</div>
 	
 	
@@ -302,25 +243,25 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTAlert.h</code><br />
+		<code class="declared-in-ref">NSString+KTUtilities.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/showPersistentAlert:withMessage:" title="showPersistentAlert:withMessage:"></a>
-	<h3 class="subsubtitle method-title">showPersistentAlert:withMessage:</h3>
+	<a name="//api/name/randomString:" title="randomString:"></a>
+	<h3 class="subsubtitle method-title">randomString:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Shows a persistent alert with a given type and message</p>
+		<p>Generate a random string of a given length</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (void)showPersistentAlert:(KTAlertType)<em>type</em> withMessage:(NSString *)<em>message</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (NSString *)randomString:(int)<em>len</em></code></div>
 
     
 	
@@ -328,18 +269,18 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>type</em></dt>
-			<dd><p>The type of alert to display. See KTAlertType and KTAlert subclasses for full descriptions</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>message</em></dt>
-			<dd><p>The message to display to the user. Depending on the type, be careful of the message length - it may be truncated in some alert types</p></dd>
+			<dt><em>len</em></dt>
+			<dd><p>The desired length of the generated string</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A random string with length &lsquo;len&rsquo;</p>
+	</div>
 	
 	
 	
@@ -347,9 +288,9 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Shows a persistent alert with a given type and message</p>
+		<p>Generate a random string of a given length</p>
 
-<p>You may wish to use a persistent message if you are showing the alert while an action takes place for an unknown time</p>
+<p>If you&rsquo;d like to control the character set, use <a href="#//api/name/randomString:withCharacterSet:">randomString:withCharacterSet:</a> otherwise, the default is KTCharacterSetAlphanumeric</p>
 	</div>
 	
 	
@@ -360,7 +301,68 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTAlert.h</code><br />
+		<code class="declared-in-ref">NSString+KTUtilities.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/randomString:withCharacterSet:" title="randomString:withCharacterSet:"></a>
+	<h3 class="subsubtitle method-title">randomString:withCharacterSet:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Generate a random string of a given length, in a given character set</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSString *)randomString:(int)<em>len</em> withCharacterSet:(KTCharacterSet)<em>charSet</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>len</em></dt>
+			<dd><p>The desired length of the generated string</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>charSet</em></dt>
+			<dd><p>The character set to use to create the string</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A random string with length &lsquo;len&rsquo;</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Generate a random string of a given length, in a given character set</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+KTUtilities.h</code><br />
 	</div>				
 	
 	
@@ -375,59 +377,18 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/dismiss" title="dismiss"></a>
-	<h3 class="subsubtitle method-title">dismiss</h3>
+	<a name="//api/name/containsCharacter:" title="containsCharacter:"></a>
+	<h3 class="subsubtitle method-title">containsCharacter:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Manually remove your KTAlert element from the view</p>
+		<p>A utility method to determine if a given character is contained within the responder</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)dismiss</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Manually remove your KTAlert element from the view</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTAlert.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/initWithType:withMessage:andDuration:" title="initWithType:withMessage:andDuration:"></a>
-	<h3 class="subsubtitle method-title">initWithType:withMessage:andDuration:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Create a KTAlert UI element</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (KTAlert *)initWithType:(KTAlertType)<em>type</em> withMessage:(NSString *)<em>message</em> andDuration:(NSUInteger)<em>durationInMillis</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)containsCharacter:(char)<em>needle</em></code></div>
 
     
 	
@@ -435,23 +396,18 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>type</em></dt>
-			<dd><p>The type of alert to display. See KTAlertType and KTAlert subclasses for full descriptions</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>message</em></dt>
-			<dd><p>The message to display to the user. Depending on the type, be careful of the message length - it may be truncated in some alert types</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>durationInMillis</em></dt>
-			<dd><p>How long to <a href="#//api/name/show">show</a> the alert. Set to 0 for a persistent alert that you remove manually</p></dd>
+			<dt><em>needle</em></dt>
+			<dd><p>The character we are searching for</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>TRUE if the responder contains the needle, FALSE otherwise</p>
+	</div>
 	
 	
 	
@@ -459,9 +415,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Create a KTAlert UI element</p>
-
-<p>Use this method if you wish to customize and <a href="#//api/name/show">show</a> manually. Otherwise, try the static methods for easier use.</p>
+		<p>A utility method to determine if a given character is contained within the responder</p>
 	</div>
 	
 	
@@ -472,29 +426,44 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTAlert.h</code><br />
+		<code class="declared-in-ref">NSString+KTUtilities.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/show" title="show"></a>
-	<h3 class="subsubtitle method-title">show</h3>
+	<a name="//api/name/containsString:" title="containsString:"></a>
+	<h3 class="subsubtitle method-title">containsString:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Manually show your KTAlert element</p>
+		<p>A utility method to determine if a given string is contained within the responder</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)show</code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)containsString:(NSString *)<em>needle</em></code></div>
 
     
 	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>needle</em></dt>
+			<dd><p>The string we are searching for</p></dd>
+		</dl>
+		
+	</div>
 	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>TRUE if the responder contains the needle, FALSE otherwise</p>
+	</div>
 	
 	
 	
@@ -502,7 +471,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Manually show your KTAlert element</p>
+		<p>A utility method to determine if a given string is contained within the responder</p>
 	</div>
 	
 	
@@ -513,7 +482,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTAlert.h</code><br />
+		<code class="declared-in-ref">NSString+KTUtilities.h</code><br />
 	</div>				
 	
 	

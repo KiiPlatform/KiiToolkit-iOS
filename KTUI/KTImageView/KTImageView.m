@@ -24,7 +24,7 @@
 #import <KiiSDK/Kii.h>
 
 #import "UIView+KTUtilities.h"
-#import "KTProgressBar.h"
+#import "KTProgressIndicator.h"
 
 @implementation KTImageView
 
@@ -43,7 +43,7 @@
     
     // create the progress indicator
     CGRect f = CGRectMake(0, 0, width, height);
-    _progressIndicator = [[KTProgressBar alloc] initWithFrame:f];
+    _progressIndicator = [[KTProgressIndicator alloc] initWithFrame:f];
     [self addSubview:_progressIndicator];
     
     // center the progress bar

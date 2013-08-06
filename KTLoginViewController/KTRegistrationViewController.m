@@ -117,6 +117,12 @@
             // registration was successful
             if(error == nil) {
                 
+                // show success
+                [KTLoader showLoader:@"Registered!"
+                            animated:TRUE
+                       withIndicator:KTLoaderIndicatorSuccess
+                     andHideInterval:KTLoaderDurationAuto];
+                
                 // hide this view
                 [self dismissViewControllerAnimated:TRUE completion:nil];
             }
@@ -145,10 +151,10 @@
                 
                 // tell the console with a more descriptive description
                 NSLog(@"Error creating object: %@", error.description);
+                
+                // hide the loading UI element
+                [KTLoader hideLoader:TRUE];
             }
-            
-            // hide the loading UI element
-            [KTLoader hideLoader:TRUE];
 
         }];
     }

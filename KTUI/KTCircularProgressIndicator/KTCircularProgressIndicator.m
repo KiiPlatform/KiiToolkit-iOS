@@ -17,47 +17,52 @@
 //
 //
 
-#import "KTLoaderProgressIndicator.h"
+#import "KTCircularProgressIndicator.h"
 
-@implementation KTLoaderProgressIndicator
+@implementation KTCircularProgressIndicator
 
 - (id)initWithFrame:(CGRect)frame {
+    
     self = [super initWithFrame:frame];
+    
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        
+        // set our defaults
         _progress = 0.0;
+        _strokeColor = [UIColor whiteColor];
+        _fillColor = [UIColor whiteColor];
+        
+        self.backgroundColor = [UIColor clearColor];
     }
+    
     return self;
 }
 
 - (void)drawRect:(CGRect)rect {
+    
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     CGContextClearRect(contextRef, rect);
         
-    // inner loading circle is 80% of background circle
     float radius = (rect.size.width/2.0) * 0.80;
     CGPoint center = CGPointMake(rect.size.width/2.0, rect.size.height/2.0);
     
-    // draw circle stroke
     CGContextSetLineWidth(contextRef, 2.0);
     CGContextAddArc(contextRef, center.x, center.y, radius, 0, 2*M_PI, 0);
-    CGContextSetStrokeColorWithColor(contextRef, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(contextRef, _strokeColor.CGColor);
     CGContextStrokePath(contextRef);
     
-    // draw filling starting at 0%.
-    // must subtract pi/2 to transform starting position to top of circle
-    float finalDegree = _progress*2*M_PI - M_PI/2;
-    CGContextSetFillColorWithColor(contextRef, [UIColor whiteColor].CGColor);
+    float finalDegree = _progress * 2 * M_PI - M_PI / 2;
+    CGContextSetFillColorWithColor(contextRef, _fillColor.CGColor);
     CGContextMoveToPoint(contextRef, center.x, center.y);
-    CGContextAddArc(contextRef, center.x, center.y, radius, -M_PI/2, finalDegree, 0);
+    CGContextAddArc(contextRef, center.x, center.y, radius, -1 * M_PI / 2, finalDegree, 0);
     CGContextClosePath(contextRef);
     CGContextFillPath(contextRef);
 }
 
+// override the setter to re-draw our indicator
 - (void)setProgress:(double)value {
+    NSLog(@"Setting progress: %g on %@", value, self);
     _progress = value;
-    NSLog(@"Value: %g", value);
-    NSLog(@"Progress: %g", value);
     if (_progress <= 1.0) {
         [self setNeedsDisplay];
     }

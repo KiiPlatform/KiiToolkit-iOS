@@ -19,6 +19,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class KTCircularProgressIndicator;
+
 enum {
     KTLoaderIndicatorSpinner,
     KTLoaderIndicatorSuccess,
@@ -32,7 +34,6 @@ enum {
     KTLoaderDurationAuto = 3000
 };
 typedef NSUInteger KTLoaderIndicatorDuration;
-
 
 /** 
  This class is made for conveniently showing a loading indicator that does not allow the UI to be interacted with. This is useful when your application is performing an asynchronous operation and the user must wait for completion before continuing their interaction
@@ -100,5 +101,8 @@ typedef NSUInteger KTLoaderIndicatorDuration;
  @param progress A value from [0,1] that indicates the progress
  */
 + (void) setProgress:(double)progress;
+
+/** Applicable only to the KTLoaderIndicatorType KTLoaderIndicatorProgress, access this object to update the parameters (colors, etc) of the progress indicator */
++ (KTCircularProgressIndicator*)progressIndicator;
 
 @end

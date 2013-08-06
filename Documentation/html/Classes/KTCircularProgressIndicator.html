@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KTProgressBar Class Reference</title>
+		<title>KTCircularProgressIndicator Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
@@ -16,7 +16,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KTProgressBar Class Reference</h1>
+				<h1 class="hideInXcode">KTCircularProgressIndicator Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -39,18 +39,15 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/fillColor">&nbsp;&nbsp;&nbsp;&nbsp;fillColor</option>
+	
 	<option value="//api/name/progress">&nbsp;&nbsp;&nbsp;&nbsp;progress</option>
 	
-	<option value="//api/name/subProgressView">&nbsp;&nbsp;&nbsp;&nbsp;subProgressView</option>
+	<option value="//api/name/strokeColor">&nbsp;&nbsp;&nbsp;&nbsp;strokeColor</option>
 	
 	
 	
 	
-	
-	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/setProgress:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- setProgress:animated:</option>
 	
 	
 	
@@ -76,28 +73,24 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fillColor">fillColor</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/progress">progress</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/subProgressView">subProgressView</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/strokeColor">strokeColor</a></span></li>
 	
 </ul></li>
 
 
 
 
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setProgress:animated:">setProgress:animated:</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KTProgressBar Class Reference" name="top"></a>
+				<a title="KTCircularProgressIndicator Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -106,7 +99,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KTProgressBar Class Reference</h1>
+						<h1 class="title title-header">KTCircularProgressIndicator Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -117,7 +110,7 @@
 	<td class="specification-value">UIView</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KTProgressBar.h<br />KTProgressBar.m</td>
+	<td class="specification-value">KTCircularProgressIndicator.h<br />KTCircularProgressIndicator.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -127,7 +120,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A UI element that displays a <a href="#//api/name/progress">progress</a> bar. This class will be skinnable with a few default types to get you started. It is meant to be a nicer-looking, more customizable solution to the standard iOS UIProgressView</p>
+						<p>A code-controlled visual element to signify <a href="#//api/name/progress">progress</a>. We sometimes refer to this as a &lsquo;pie&rsquo; loader</p>
 					</div>
 					
 					
@@ -151,15 +144,15 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/subProgressView">&nbsp;&nbsp;subProgressView</a></code>
+		<code><a href="#//api/name/strokeColor">&nbsp;&nbsp;strokeColor</a></code>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/setProgress:animated:">&ndash;&nbsp;setProgress:animated:</a></code>
+		<code><a href="#//api/name/fillColor">&nbsp;&nbsp;fillColor</a></code>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -175,13 +168,54 @@
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/fillColor" title="fillColor"></a>
+	<h3 class="subsubtitle method-title">fillColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The fill color of the &lsquo;pie&rsquo; - default is [UIColor whiteColor]</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIColor *fillColor</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The fill color of the &lsquo;pie&rsquo; - default is [UIColor whiteColor]</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTCircularProgressIndicator.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/progress" title="progress"></a>
 	<h3 class="subsubtitle method-title">progress</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The current progress value of the bar [0, 1] *</p>
+		<p>The progress amount to use from [0,1] with 1 being a &lsquo;full pie&rsquo;</p>
 	</div>		
 	
     
@@ -198,7 +232,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The current progress value of the bar [0, 1] *</p>
+		<p>The progress amount to use from [0,1] with 1 being a &lsquo;full pie&rsquo;</p>
 	</div>
 	
 	
@@ -209,25 +243,25 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTProgressBar.h</code><br />
+		<code class="declared-in-ref">KTCircularProgressIndicator.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/subProgressView" title="subProgressView"></a>
-	<h3 class="subsubtitle method-title">subProgressView</h3>
+	<a name="//api/name/strokeColor" title="strokeColor"></a>
+	<h3 class="subsubtitle method-title">strokeColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The inside view (the actual <a href="#//api/name/progress">progress</a> bar, inside the container)</p>
+		<p>The stroke color of the &lsquo;pie&rsquo; - default is [UIColor whiteColor]</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIView *subProgressView</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIColor *strokeColor</code></div>
 
     
 	
@@ -239,7 +273,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The inside view (the actual <a href="#//api/name/progress">progress</a> bar, inside the container)</p>
+		<p>The stroke color of the &lsquo;pie&rsquo; - default is [UIColor whiteColor]</p>
 	</div>
 	
 	
@@ -250,7 +284,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTProgressBar.h</code><br />
+		<code class="declared-in-ref">KTCircularProgressIndicator.h</code><br />
 	</div>				
 	
 	
@@ -261,70 +295,6 @@
 					
 					
 					
-					
-					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/setProgress:animated:" title="setProgress:animated:"></a>
-	<h3 class="subsubtitle method-title">setProgress:animated:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Set the <a href="#//api/name/progress">progress</a> with bar growth animation</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)setProgress:(double)<em>progress</em> animated:(BOOL)<em>animated</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>progress</em></dt>
-			<dd><p>The value [0,1] to set the <a href="#//api/name/progress">progress</a> bar to</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>animated</em></dt>
-			<dd><p>TRUE if the <a href="#//api/name/progress">progress</a> bar should &lsquo;grow&rsquo; with animation. FALSE otherwise</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Set the <a href="#//api/name/progress">progress</a> with bar growth animation</p>
-
-<p>This method should be called if you don&rsquo;t wish to have animation with the standard <a href="#//api/name/progress">progress</a> property (or <a href="#//api/name/progress">setProgress:</a> method call), as the animation default is usually TRUE</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KTProgressBar.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
 					
 					
 				</div>
@@ -337,7 +307,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Kii. All rights reserved. (Last updated: 2013-07-19)</span><br />
+						<p><span class="copyright">&copy; 2013 Kii. All rights reserved. (Last updated: 2013-08-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

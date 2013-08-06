@@ -27,14 +27,53 @@ typedef enum {
     KTCharacterSetAlphanumeric      = KTCharacterSetAlpha | KTCharacterSetNumeric
 } KTCharacterSet;
 
+
+/**
+ Utility methods for NSString to make commonly-needed functionality more efficient and reusable.
+ */
 @interface NSString (KTUtilities)
 
+/**
+ Generate a random string of a given length
+ 
+ If you'd like to control the character set, use randomString:withCharacterSet: otherwise, the default is KTCharacterSetAlphanumeric
+ 
+ @param len The desired length of the generated string
+ @return A random string with length 'len'
+ */
 + (NSString*) randomString:(int)len;
+
+/**
+ Generate a random string of a given length, in a given character set
+ 
+ @param len The desired length of the generated string
+ @param charSet The character set to use to create the string
+ @return A random string with length 'len'
+ */
 + (NSString*) randomString:(int)len withCharacterSet:(KTCharacterSet)charSet;
 
+/**
+ A utility method to determine if a given string is contained within the responder
+ 
+ @param needle The string we are searching for
+ @return TRUE if the responder contains the needle, FALSE otherwise
+ */
 - (BOOL) containsString:(NSString*)needle;
+
+/**
+ A utility method to determine if a given character is contained within the responder
+ 
+ @param needle The character we are searching for
+ @return TRUE if the responder contains the needle, FALSE otherwise
+ */
 - (BOOL) containsCharacter:(char)needle;
 
+/**
+ Retrieve the characters within a given KTCharacterSet
+ 
+ @param set The character set to retrieve
+ @return The items within the character set
+ */
 + (NSString*) charactersForSet:(KTCharacterSet)set;
 
 @end

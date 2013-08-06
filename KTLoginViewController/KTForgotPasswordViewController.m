@@ -49,10 +49,10 @@
                      if(error == nil) {
                          
                          // show the user
-                         KTAlert *alert = [[KTAlert alloc] initWithType:KTAlertTypeBar
-                                                            withMessage:@"Password reset instructions sent!"
-                                                            andDuration:KTAlertDurationLong];
-                         [alert show];
+                         [KTLoader showLoader:@"Password reset sent!"
+                                     animated:TRUE
+                                withIndicator:KTLoaderIndicatorSuccess
+                              andHideInterval:KTLoaderDurationAuto];
                          
                          // and hide this view
                          [self dismissViewControllerAnimated:TRUE completion:nil];
@@ -68,11 +68,11 @@
                          
                          // tell the console with a descriptive message
                          NSLog(@"Error creating object: %@", error.description);
+                         
+                         // the action is complete, hide the loading view
+                         [KTLoader hideLoader:TRUE];
 
                      }
-                     
-                     // the action is complete, hide the loading view
-                     [KTLoader hideLoader:TRUE];
                      
                  }];
 

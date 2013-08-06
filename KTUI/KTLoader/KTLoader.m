@@ -20,7 +20,7 @@
 #import "KTLoader.h"
 
 #import "UIView+KTUtilities.h"
-#import "KTLoaderProgressIndicator.h"
+#import "KTCircularProgressIndicator.h"
 #import <QuartzCore/QuartzCore.h>
 
 // Constants
@@ -28,10 +28,10 @@
 
 @interface KTLoader()
 
+@property (nonatomic, strong) KTCircularProgressIndicator *progressIndicator;
 @property (nonatomic, strong) UIView *loader;
 @property (nonatomic, strong) UILabel *loaderLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
-@property (nonatomic, strong) KTLoaderProgressIndicator *progressIndicator;
 @property (nonatomic, strong) UIImageView *indicator;
 
 @end
@@ -44,6 +44,8 @@ static KTLoader *sharedInstance = nil;
 
 - (void) initLoader
 {
+    NSLog(@"Initting loader");
+    
     UIWindow *appWindow = [[UIApplication sharedApplication] keyWindow];
     
     _loader = [[UIView alloc] initWithFrame:appWindow.bounds];
@@ -81,7 +83,7 @@ static KTLoader *sharedInstance = nil;
     [loaderBG addSubview:_indicator];
     [_indicator normalizeView];
     
-    _progressIndicator = [[KTLoaderProgressIndicator alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    _progressIndicator = [[KTCircularProgressIndicator alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     _progressIndicator.center = _spinner.center;
     [loaderBG addSubview:_progressIndicator];
     [_progressIndicator normalizeView];
@@ -104,6 +106,8 @@ static KTLoader *sharedInstance = nil;
             [KTLoader sharedInstance].indicator.hidden = TRUE;
             [KTLoader sharedInstance].progressIndicator.hidden = TRUE;
         } else if(indicator == KTLoaderIndicatorProgress){
+            
+            NSLog(@"Showing loader");
             
             [[KTLoader sharedInstance].spinner stopAnimating];
             [KTLoader sharedInstance].indicator.hidden = TRUE;
@@ -186,10 +190,16 @@ static KTLoader *sharedInstance = nil;
 
 + (void) setProgress:(double)progress
 {
-    if([KTLoader sharedInstance].progressIndicator) {
+    dispatch_async(dispatch_get_main_queue(), ^{
         [[KTLoader sharedInstance].progressIndicator setProgress:progress];
-    }
+    });
 }
+
++ (KTCircularProgressIndicator*)progressIndicator
+{
+    return [KTLoader sharedInstance].progressIndicator;
+}
+
 
 /*
  It is important to leave this empty. This class should persist throughout the

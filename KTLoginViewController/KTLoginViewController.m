@@ -57,6 +57,11 @@
                      // authentication was successful
                      if(error == nil) {
                          
+                         [KTLoader showLoader:@"Logged In!"
+                                     animated:TRUE
+                                withIndicator:KTLoaderIndicatorSuccess
+                              andHideInterval:KTLoaderDurationAuto];
+
                          // hide this view and go back to the app
                          [self dismissViewControllerAnimated:TRUE completion:nil];
                      }
@@ -71,10 +76,10 @@
                          
                          // tell the console with a more descriptive error
                          NSLog(@"Error creating object: %@", error.description);
+                         
+                         // the authentication is complete, hide the loading view
+                         [KTLoader hideLoader:TRUE];
                      }
-                     
-                     // the authentication is complete, hide the loading view
-                     [KTLoader hideLoader:TRUE];
                      
                  }];
     

@@ -41,6 +41,14 @@
 - (void) tableDidFinishLoading:(NSError*)error;
 @end
 
+
+
+/**
+ This class is a subclass of UITableViewController which allows you to define a KiiQuery object and the view controller will automatically populate the results based on the query. This class includes attributes such as pull-to-refresh (pre-iOS6), pagination and more.
+ 
+ To learn more or see an example, check out the GitHub wiki here: https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/kttableviewcontroller
+ 
+ */
 @interface KTTableViewController : UITableViewController <UIScrollViewDelegate>
 
 /** The query to be executed when the table view is loaded/refreshed */
@@ -66,7 +74,7 @@
 /** A subview of refreshNoticeView, this label displays the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
 @property (nonatomic, strong) UILabel *refreshNoticeLabel;
 
-/** A subview of refreshNoticeView, this is the circular arrow that displays alongside the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
+/** A subview of refreshNoticeView, this is the arrow that displays alongside the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
 @property (nonatomic, strong) CKRefreshArrowView *loadingArrow;
 
 /** Shown when the table view is refreshing, use this property to customize color, etc. */

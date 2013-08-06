@@ -61,7 +61,6 @@
 
 // override the setter to re-draw our indicator
 - (void)setProgress:(double)value {
-    NSLog(@"Setting progress: %g on %@", value, self);
     _progress = value;
     if (_progress <= 1.0) {
         [self setNeedsDisplay];

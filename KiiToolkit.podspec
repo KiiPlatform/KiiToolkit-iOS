@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KiiToolkit"
-  s.version      = "1.0.0"
+  s.version      = "1.1"
   s.summary      = "A suite of iOS classes and methods to make app development simpler."
   s.description  = <<-DESC
                     Includes not only utilities for developing on 
@@ -12,10 +12,10 @@ Pod::Spec.new do |s|
   s.homepage     = "http://github.com/KiiPlatform/KiiToolkit-iOS"
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
   s.author       = { "Chris Beauchamp" => "chris.beauchamp@kii.com" }
-  s.source       = { :git => "https://github.com/KiiPlatform/KiiToolkit-iOS.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/KiiPlatform/KiiToolkit-iOS.git", :tag => "1.1" }
   s.platform     = :ios, '4.3'
   s.requires_arc = true
   s.source_files = 'KiiToolkit.h', '{KTAppRater,KTLoginViewController,KTTableViewController,KTUI,KTUtilities}/**/*.{h,m}'
   s.resources = 'KTUI/KTLoader/images/*', 'KTLoginViewController/images/*'
-  s.frameworks = 'QuartzCore', 'SystemConfiguration', 'MobileCoreServices'
+  s.frameworks = 'QuartzCore', 'SystemConfiguration', 'MobileCoreServices', 'CoreGraphics'
 end

@@ -44,8 +44,6 @@ static KTLoader *sharedInstance = nil;
 
 - (void) initLoader
 {
-    NSLog(@"Initting loader");
-    
     UIWindow *appWindow = [[UIApplication sharedApplication] keyWindow];
     
     _loader = [[UIView alloc] initWithFrame:appWindow.bounds];
@@ -106,8 +104,6 @@ static KTLoader *sharedInstance = nil;
             [KTLoader sharedInstance].indicator.hidden = TRUE;
             [KTLoader sharedInstance].progressIndicator.hidden = TRUE;
         } else if(indicator == KTLoaderIndicatorProgress){
-            
-            NSLog(@"Showing loader");
             
             [[KTLoader sharedInstance].spinner stopAnimating];
             [KTLoader sharedInstance].indicator.hidden = TRUE;

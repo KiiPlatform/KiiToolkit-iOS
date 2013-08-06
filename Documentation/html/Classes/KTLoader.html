@@ -41,9 +41,21 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
+	<option value="//api/name/hideLoader">&nbsp;&nbsp;&nbsp;&nbsp;+ hideLoader</option>
+	
 	<option value="//api/name/hideLoader:">&nbsp;&nbsp;&nbsp;&nbsp;+ hideLoader:</option>
 	
+	<option value="//api/name/progressIndicator">&nbsp;&nbsp;&nbsp;&nbsp;+ progressIndicator</option>
+	
+	<option value="//api/name/setProgress:">&nbsp;&nbsp;&nbsp;&nbsp;+ setProgress:</option>
+	
+	<option value="//api/name/showLoader:">&nbsp;&nbsp;&nbsp;&nbsp;+ showLoader:</option>
+	
 	<option value="//api/name/showLoader:animated:">&nbsp;&nbsp;&nbsp;&nbsp;+ showLoader:animated:</option>
+	
+	<option value="//api/name/showLoader:animated:withIndicator:">&nbsp;&nbsp;&nbsp;&nbsp;+ showLoader:animated:withIndicator:</option>
+	
+	<option value="//api/name/showLoader:animated:withIndicator:andHideInterval:">&nbsp;&nbsp;&nbsp;&nbsp;+ showLoader:animated:withIndicator:andHideInterval:</option>
 	
 	
 	
@@ -73,9 +85,21 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/hideLoader">hideLoader</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/hideLoader:">hideLoader:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/progressIndicator">progressIndicator</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setProgress:">setProgress:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showLoader:">showLoader:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showLoader:animated:">showLoader:animated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showLoader:animated:withIndicator:">showLoader:animated:withIndicator:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showLoader:animated:withIndicator:andHideInterval:">showLoader:animated:withIndicator:andHideInterval:</a></span></li>
 	
 </ul></li>
 
@@ -116,7 +140,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>This class is made for conveniently showing a full-screen loader and not allowing the UI to be interacted with. This is useful when your application is performing an asynchronous operation and the user must wait for completion before continuing their interaction</p>
+						<p>This class is made for conveniently showing a loading indicator that does not allow the UI to be interacted with. This is useful when your application is performing an asynchronous operation and the user must wait for completion before continuing their interaction</p>
 					</div>
 					
 					
@@ -134,13 +158,49 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/showLoader:">+&nbsp;showLoader:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/showLoader:animated:">+&nbsp;showLoader:animated:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/showLoader:animated:withIndicator:">+&nbsp;showLoader:animated:withIndicator:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/showLoader:animated:withIndicator:andHideInterval:">+&nbsp;showLoader:animated:withIndicator:andHideInterval:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/hideLoader">+&nbsp;hideLoader</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/hideLoader:">+&nbsp;hideLoader:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setProgress:">+&nbsp;setProgress:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/progressIndicator">+&nbsp;progressIndicator</a></code>
 	</span>
 	
 	
@@ -160,13 +220,54 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/hideLoader" title="hideLoader"></a>
+	<h3 class="subsubtitle method-title">hideLoader</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Hide the <a href="#//api/name/loader">loader</a> that is currently on the screen with the default animation type</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)hideLoader</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Hide the <a href="#//api/name/loader">loader</a> that is currently on the screen with the default animation type</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTLoader.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/hideLoader:" title="hideLoader:"></a>
 	<h3 class="subsubtitle method-title">hideLoader:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Hide any loader that is currently on the screen with an animation option</p>
+		<p>Hide any <a href="#//api/name/loader">loader</a> that is currently on the screen with an animation option</p>
 	</div>		
 	
     
@@ -193,7 +294,150 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Hide any loader that is currently on the screen with an animation option</p>
+		<p>Hide any <a href="#//api/name/loader">loader</a> that is currently on the screen with an animation option</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTLoader.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/progressIndicator" title="progressIndicator"></a>
+	<h3 class="subsubtitle method-title">progressIndicator</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Applicable only to the KTLoaderIndicatorType KTLoaderIndicatorProgress, access this object to update the parameters (colors, etc) of the progress <a href="#//api/name/indicator">indicator</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (KTCircularProgressIndicator *)progressIndicator</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Applicable only to the KTLoaderIndicatorType KTLoaderIndicatorProgress, access this object to update the parameters (colors, etc) of the progress <a href="#//api/name/indicator">indicator</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTLoader.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setProgress:" title="setProgress:"></a>
+	<h3 class="subsubtitle method-title">setProgress:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Applicable only to the KTLoaderIndicatorType KTLoaderIndicatorProgress, this will show a circular <a href="#//api/name/loader">loader</a> with progress</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)setProgress:(double)<em>progress</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>progress</em></dt>
+			<dd><p>A value from [0,1] that indicates the progress</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Applicable only to the KTLoaderIndicatorType KTLoaderIndicatorProgress, this will show a circular <a href="#//api/name/loader">loader</a> with progress</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTLoader.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/showLoader:" title="showLoader:"></a>
+	<h3 class="subsubtitle method-title">showLoader:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message and default extra options. This is the most basic method call available.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)showLoader:(NSString *)<em>message</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>message</em></dt>
+			<dd><p>The one-line message to display to the user within the <a href="#//api/name/loader">loader</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message and default extra options. This is the most basic method call available.</p>
 	</div>
 	
 	
@@ -217,7 +461,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Show a loader with a given message and animate in/out option</p>
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message and animate in/out option, the extra options are set to default</p>
 	</div>		
 	
     
@@ -231,7 +475,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>message</em></dt>
-			<dd><p>The one-line message to display to the user within the loader</p></dd>
+			<dd><p>The one-line message to display to the user within the <a href="#//api/name/loader">loader</a></p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -249,7 +493,134 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Show a loader with a given message and animate in/out option</p>
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message and animate in/out option, the extra options are set to default</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTLoader.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/showLoader:animated:withIndicator:" title="showLoader:animated:withIndicator:"></a>
+	<h3 class="subsubtitle method-title">showLoader:animated:withIndicator:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message, animate in/out option and <a href="#//api/name/indicator">indicator</a> type. The duration is set to default</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)showLoader:(NSString *)<em>message</em> animated:(BOOL)<em>animated</em> withIndicator:(KTLoaderIndicatorType)<em>indicator</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>message</em></dt>
+			<dd><p>The one-line message to display to the user within the <a href="#//api/name/loader">loader</a></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>TRUE if the view should animate in, FALSE otherwise</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>indicator</em></dt>
+			<dd><p>One of the KTLoaderIndicatorType options to be displayed within the <a href="#//api/name/loader">loader</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message, animate in/out option and <a href="#//api/name/indicator">indicator</a> type. The duration is set to default</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTLoader.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/showLoader:animated:withIndicator:andHideInterval:" title="showLoader:animated:withIndicator:andHideInterval:"></a>
+	<h3 class="subsubtitle method-title">showLoader:animated:withIndicator:andHideInterval:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message, animate in/out option and <a href="#//api/name/indicator">indicator</a> type. The duration is set to default</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)showLoader:(NSString *)<em>message</em> animated:(BOOL)<em>animated</em> withIndicator:(KTLoaderIndicatorType)<em>indicator</em> andHideInterval:(KTLoaderIndicatorDuration)<em>hideInterval</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>message</em></dt>
+			<dd><p>The one-line message to display to the user within the <a href="#//api/name/loader">loader</a></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>animated</em></dt>
+			<dd><p>TRUE if the view should animate in, FALSE otherwise</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>indicator</em></dt>
+			<dd><p>One of the KTLoaderIndicatorType options to be displayed within the <a href="#//api/name/loader">loader</a></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>hideInterval</em></dt>
+			<dd><p>Can either be one of the KTLoaderIndicatorDuration options or an integer representing milliseconds</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Show a <a href="#//api/name/loader">loader</a> with a given message, animate in/out option and <a href="#//api/name/indicator">indicator</a> type. The duration is set to default</p>
 	</div>
 	
 	
@@ -281,7 +652,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Kii. All rights reserved. (Last updated: 2013-07-19)</span><br />
+						<p><span class="copyright">&copy; 2013 Kii. All rights reserved. (Last updated: 2013-08-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

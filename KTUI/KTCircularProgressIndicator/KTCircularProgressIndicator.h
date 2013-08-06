@@ -19,6 +19,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ A code-controlled visual element to signify progress. We sometimes refer to this as a 'pie' loader
+ */
 @interface KTCircularProgressIndicator : UIView
 
 /** The progress amount to use from [0,1] with 1 being a 'full pie' */

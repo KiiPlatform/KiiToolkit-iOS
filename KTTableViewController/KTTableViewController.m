@@ -382,6 +382,11 @@
     [self stopLoading];
 }
 
+- (KiiObject*) kiiObjectAtIndex:(NSUInteger)index
+{
+    return [_results objectAtIndex:index];
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
               cellForKiiObject:(id)object

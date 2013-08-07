@@ -123,6 +123,7 @@ static KTLoader *sharedInstance = nil;
         
         [KTLoader sharedInstance].loaderLabel.text = message;
         [KTLoader sharedInstance].loader.hidden = FALSE;
+        [KTLoader sharedInstance].loader.alpha = 1.0f;
         
         if(hideInterval > KTLoaderDurationIndefinite) {
             [KTLoader performSelector:@selector(hideLoader) withObject:nil afterDelay:(hideInterval/1000)];
@@ -167,13 +168,13 @@ static KTLoader *sharedInstance = nil;
                              animations:^{
                                  [KTLoader sharedInstance].loader.alpha = 0.0f;
                              } completion:^(BOOL finished) {
-                                 [[KTLoader sharedInstance].loader removeFromSuperview];
+                                 [[KTLoader sharedInstance].loader setHidden:TRUE];
                              }];
         }
         
         // otherwise, just remove it from the superview
         else {
-            [[KTLoader sharedInstance].loader removeFromSuperview];
+            [[KTLoader sharedInstance].loader setHidden:TRUE];
         }
         
     });

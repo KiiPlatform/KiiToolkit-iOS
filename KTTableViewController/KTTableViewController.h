@@ -87,6 +87,14 @@
  */
 - (void) refreshQuery;
 
+/**
+ Get the associated KiiObject at the given index
+ 
+ @param index The index of the item you'd like to retrieve
+ @return A KiiObject that represents the given index
+ */
+- (KiiObject*) kiiObjectAtIndex:(NSUInteger)index;
+
 #pragma mark - Datasource methods
 
 /**
@@ -100,5 +108,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
               cellForKiiObject:(id)object
                    atIndexPath:(NSIndexPath*)indexPath;
+
 
 @end

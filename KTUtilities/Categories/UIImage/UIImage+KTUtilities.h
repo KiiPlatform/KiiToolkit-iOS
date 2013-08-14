@@ -33,4 +33,14 @@
  */
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
+/**
+ Overlay a color on top of an image
+ 
+ Should only be used with images with alpha. Can be useful to change an image's color dynamically.
+ 
+ @param color The color you'd like to overlay
+ @return A UIImage object with the new image representation
+ */
+- (UIImage*) colorImage:(UIColor*)color;
+
 @end

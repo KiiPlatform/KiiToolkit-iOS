@@ -76,4 +76,18 @@ typedef enum {
  */
 + (NSString*) charactersForSet:(KTCharacterSet)set;
 
+/** 
+ Generate an md5 has of the given string
+ 
+ @return a 32 character md5 string representation
+ */
+- (NSString*) md5;
+
+/**
+ Generate a url encoding of the given string
+ 
+ @return a url-encoded version of the string
+ */
+- (NSString*) urlEncode;
+
 @end

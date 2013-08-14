@@ -18,6 +18,7 @@
 //
 
 #import "KTTableViewController.h"
+#import "KTRefreshArrowView.h"
 
 #if __has_include(<KiiSDK/Kii.h>)
 

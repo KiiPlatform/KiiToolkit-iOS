@@ -18,9 +18,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CKRefreshArrowView.h"
 
-@class KiiQuery, KiiBucket, KiiObject;
+@class KiiQuery, KiiBucket, KiiObject, KTRefreshArrowView;
 
 /** 
  Implement the delegate methods to be notified of changes in the status
@@ -75,7 +74,7 @@
 @property (nonatomic, strong) UILabel *refreshNoticeLabel;
 
 /** A subview of refreshNoticeView, this is the arrow that displays alongside the pull-to-refresh text. Manipulate this view to customize the look of the pull-to-refresh mechanism */
-@property (nonatomic, strong) CKRefreshArrowView *loadingArrow;
+@property (nonatomic, strong) KTRefreshArrowView *loadingArrow;
 
 /** Shown when the table view is refreshing, use this property to customize color, etc. */
 @property (nonatomic, strong) UIActivityIndicatorView *refreshSpinner;

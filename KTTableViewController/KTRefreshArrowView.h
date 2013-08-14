@@ -22,7 +22,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CKRefreshArrowView : UIView
+@interface KTRefreshArrowView : UIView
 
 @property (nonatomic) CGFloat progress;
 @property (nonatomic) UIColor *tintColor;

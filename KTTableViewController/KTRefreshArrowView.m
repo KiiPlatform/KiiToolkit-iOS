@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "CKRefreshArrowView.h"
+#import "KTRefreshArrowView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #if !__has_feature(objc_arc)
 #error Add -fobjc-arc to the compile flags for CKRefreshArrowView.m
 #endif
 
-@implementation CKRefreshArrowView {
+@implementation KTRefreshArrowView {
     BOOL _rotated;
 }
 
@@ -35,7 +35,7 @@
     return [CAShapeLayer class];
 }
 
-static void commonSetup(CKRefreshArrowView *self) {
+static void commonSetup(KTRefreshArrowView *self) {
     self.tintColor = [UIColor colorWithWhite:0.5 alpha:1];
     self.backgroundColor = [UIColor clearColor];
 }

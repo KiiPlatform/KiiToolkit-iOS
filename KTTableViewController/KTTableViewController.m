@@ -31,9 +31,7 @@
 
     KiiQuery *_nextQuery;
     NSMutableArray *_results;
-    
-    BOOL _autoHandleErrors;
-    
+        
     BOOL _isLoading;
     BOOL _isDragging;
     
@@ -221,7 +219,6 @@
                                  UIViewAutoresizingFlexibleBottomMargin);
     [_refreshHeader addSubview:_refreshSpinner];
     
-    [self refreshQuery];
 }
 
 - (void)didReceiveMemoryWarning

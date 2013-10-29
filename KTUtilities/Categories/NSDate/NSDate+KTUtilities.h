@@ -17,16 +17,21 @@
 //
 //
 
+#import <Foundation/Foundation.h>
 
 /**
- Import this file for including the KTUtility subset.
+ Utility methods for NSDate to make common functionality more efficient and reusable.
  */
+@interface NSDate (KTUtilities)
 
-#import "UIColor+KTUtilities.h"
-#import "UIView+KTUtilities.h"
-#import "NSString+KTUtilities.h"
-#import "UIImage+KTUtilities.h"
-#import "NSMutableArray+KTUtilities.h"
-#import "KTNetworkingUtilities.h"
-#import "NSDate+KTUtilities.h"
-#import "NSArray+KTUtilities.h"
+/**
+ Get a string representation of the given date
+ 
+ Not a standard date string, but in readable format like "3 hours ago"
+ 
+ @param shortened TRUE if the word should be shortened (i.e. 3h ago). FALSE otherwise (i.e. 3 hours ago)
+ @return A string representation of the time
+ */
+- (NSString*) timeAgo:(BOOL)shortened;
+
+@end

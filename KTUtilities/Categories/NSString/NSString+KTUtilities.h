@@ -76,4 +76,6 @@ typedef enum {
  */
 + (NSString*) charactersForSet:(KTCharacterSet)set;
 
+- (CGFloat)fontSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
+
 @end

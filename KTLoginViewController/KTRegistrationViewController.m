@@ -117,6 +117,9 @@
             // registration was successful
             if(error == nil) {
                 
+                [[NSUserDefaults standardUserDefaults] setObject:user.accessToken forKey:@"kii-token"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
                 // show success
                 [KTLoader showLoader:@"Registered!"
                             animated:TRUE

@@ -66,6 +66,9 @@
 /** When enabled, pull-to-refresh will be available. This is available pre-iOS6 and the view is customizable via refreshNoticeView. Default = YES */
 @property (nonatomic, assign) BOOL refreshControlEnabled;
 
+/** When enabled, the view will display errors when the data can't be loaded. Turn this off to do custom error handling and use the delegate methods to listen for errors. Default = YES */
+@property (nonatomic, assign) BOOL autoHandleErrors;
+
 #pragma mark - Refresh notice view
 
 /** This view displays the pull-to-refresh arrow and text labels. Manipulate this view to customize the look of the pull-to-refresh mechanism */

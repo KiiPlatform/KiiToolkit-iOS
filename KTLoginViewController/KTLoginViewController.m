@@ -57,6 +57,9 @@
                      // authentication was successful
                      if(error == nil) {
                          
+                         [[NSUserDefaults standardUserDefaults] setObject:user.accessToken forKey:@"kii-token"];
+                         [[NSUserDefaults standardUserDefaults] synchronize];
+
                          [KTLoader showLoader:@"Logged In!"
                                      animated:TRUE
                                 withIndicator:KTLoaderIndicatorSuccess

@@ -22,5 +22,5 @@ Not only is every class and method fully documented, but we strive to make well-
 ### Who owns it?
 Developers at Kii are the main contributors, but it is completely open source under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0 "Apache 2.0") - so feel free to copy/change/modify as needed. We would love to see your contributions and ideas!
 
-### Is it an official part of Kii Cloud?
+### Is KiiToolkit an official part of Kii Cloud?
 KiiToolkit is created to help developers, and is subject to change at any time. The project is developed separately and does not have any guarantees of maintenance or upgrades as Kii Cloud evolves.

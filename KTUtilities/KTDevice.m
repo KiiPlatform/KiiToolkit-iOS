@@ -17,17 +17,28 @@
 //
 //
 
-
-/**
- Import this file for including the KTUtility subset.
- */
-
-#import "UIColor+KTUtilities.h"
-#import "UIView+KTUtilities.h"
-#import "NSString+KTUtilities.h"
-#import "UIImage+KTUtilities.h"
-#import "NSMutableArray+KTUtilities.h"
-#import "KTNetworkingUtilities.h"
-#import "NSDate+KTUtilities.h"
-#import "NSArray+KTUtilities.h"
 #import "KTDevice.h"
+
+@implementation KTDevice
+
++ (BOOL) isIOS7orLater
+{
+    return [[UIDevice currentDevice].systemVersion floatValue] >= 7.0;
+}
+
++ (BOOL) isIphone
+{
+    return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone;
+}
+
++ (BOOL) isIpad
+{
+    return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+}
+
++ (BOOL) isFourInchIphone
+{
+    return ([KTDevice isIphone] && [UIScreen mainScreen].bounds.size.height == 568.0f);
+}
+
+@end

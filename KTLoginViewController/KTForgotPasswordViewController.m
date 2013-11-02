@@ -100,7 +100,9 @@
     
     if(self) {
         
-        // define the offset & width of the text field 
+        CGFloat baseY = [KTDevice isIOS7orLater] ? ktStatusBarHeight : 0;
+
+        // define the offset & width of the text field
         CGFloat xOffset = 28;
         CGFloat width = 320 - xOffset*2;
         
@@ -112,7 +114,7 @@
         self.view.backgroundColor = [UIColor colorWithWhite:0.76470588235f alpha:1.0f];
         
         // this image is a light gradient that blends in with the background
-        _backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        _backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, ktIphone5Height)];
         _backgroundImage.image = [UIImage imageNamed:@"kt_login_bg"];
         _backgroundImage.contentMode = UIViewContentModeTopLeft;
         [self.view addSubview:_backgroundImage];
@@ -121,7 +123,7 @@
         
         // create and add the close button
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _closeButton.frame = CGRectMake(0, 0, 48, 48);
+        _closeButton.frame = CGRectMake(0, baseY, 40, 40);
         _closeButton.backgroundColor = [UIColor clearColor];
         [_closeButton setImage:[UIImage imageNamed:@"kt_login_close"] forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];
@@ -133,13 +135,13 @@
         _titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kt_login_kii_logo"]];
         _titleImage.contentMode = UIViewContentModeCenter;
         _titleImage.clipsToBounds = FALSE;
-        _titleImage.frame = CGRectMake(20, 30, 280, 70);
+        _titleImage.frame = CGRectMake(20, baseY, 280, 70);
         [self.view addSubview:_titleImage];
 
-        
+        baseY += 100;
         
         // create and add the user identifier field
-        _userIdentifierField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, 100, width, 40)
+        _userIdentifierField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, baseY, width, 40)
                                                 andBorderColor:lightOrange
                                                       andGlows:TRUE];
         _userIdentifierField.delegate = self;

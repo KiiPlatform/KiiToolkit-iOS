@@ -28,7 +28,6 @@
 
 @interface KTRegistrationViewController () {
     UIScrollView *_scrollContainer;
-    CGFloat _originalY;
 }
 
 - (void) drawView;
@@ -191,7 +190,7 @@
 - (void) shiftView:(UITextField*)textField
 {
     
-    CGRect frame = CGRectZero;
+    CGAffineTransform transform = CGAffineTransformIdentity;
     
     // if the textfield is not nil, that means we're not force-hiding
     if(textField != nil) {
@@ -203,30 +202,22 @@
         // the view would be hidden or not in acceptable range, we need to slide the view
         if(offset > maximum) {
             
-            // set the frame to a safe, centered position
-            frame = self.view.frame;
-            frame.origin.y = maximum - offset;
+            transform = CGAffineTransformMakeTranslation(0, maximum - offset);
             
         }
         
     }
     
     // if the view hasn't been changed so far - it needs to be moved back to its default position
-    if(CGRectEqualToRect(frame, CGRectZero) && self.view.frame.origin.y != _originalY) {
-        frame = self.view.frame;
-        frame.origin.y = _originalY;
+    if(CGAffineTransformIsIdentity(transform) && !CGAffineTransformIsIdentity(self.view.transform)) {
+        transform = CGAffineTransformIdentity;
     }
     
-    // if there was a change made, make it a nice animated change
-    if(!CGRectEqualToRect(frame, CGRectZero)) {
-        
-        // perform the animation
-        [UIView animateWithDuration:KT_KEYBOARD_ANIMATION_TIME
-                         animations:^{
-                             self.view.frame = frame;
-                         }];
-        
-    }
+    // perform the animation
+    [UIView animateWithDuration:KT_KEYBOARD_ANIMATION_TIME
+                     animations:^{
+                         self.view.transform = transform;
+                     }];
     
 }
 
@@ -270,11 +261,11 @@
         [v removeFromSuperview];
     }    
     
+    CGFloat baseY = [KTDevice isIOS7orLater] ? ktStatusBarHeight : 0;
     
     // define the offset & width of the text field
     CGFloat xOffset = 28;
     CGFloat width = 320 - xOffset*2;
-    CGFloat yOffset = 100;
 
     // and the colors to be used in our action button
     UIColor *darkOrange = [UIColor colorWithHex:@"D27422"];
@@ -283,7 +274,7 @@
     
     // create and add the close button
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _closeButton.frame = CGRectMake(0, 0, 48, 48);
+    _closeButton.frame = CGRectMake(0, baseY, 40, 40);
     _closeButton.backgroundColor = [UIColor clearColor];
     [_closeButton setImage:[UIImage imageNamed:@"kt_login_close"] forState:UIControlStateNormal];
     [_closeButton addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];
@@ -295,16 +286,16 @@
     _titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kt_login_kii_logo"]];
     _titleImage.contentMode = UIViewContentModeCenter;
     _titleImage.clipsToBounds = FALSE;
-    _titleImage.frame = CGRectMake(20, 30, 280, 70);
+    _titleImage.frame = CGRectMake(20, baseY, 280, 70);
     [_scrollContainer addSubview:_titleImage];
 
-    
+    baseY += 80;
     
     // if the fields should display the login name
     if((_displayFields & KTRegistrationFieldLoginName) > 0) {
         
         // create and add the field
-        _loginNameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+        _loginNameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, baseY, width, 40)
                                            andBorderColor:lightOrange
                                                  andGlows:TRUE];
         _loginNameField.delegate = self;
@@ -315,7 +306,7 @@
         [_scrollContainer addSubview:_loginNameField];
         
         // increment the yOffset so the next view is located properly
-        yOffset += 54.0f;
+        baseY += 54.0f;
     }
     
 
@@ -323,7 +314,7 @@
     if((_displayFields & KTRegistrationFieldEmailAddress) > 0) {
         
         // create and add the field
-        _emailAddressField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+        _emailAddressField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, baseY, width, 40)
                                               andBorderColor:lightOrange
                                                     andGlows:TRUE];
         _emailAddressField.delegate = self;
@@ -334,7 +325,7 @@
         [_scrollContainer addSubview:_emailAddressField];
 
         // increment the yOffset so the next view is located properly
-        yOffset += 54.0f;
+        baseY += 54.0f;
     }
     
 
@@ -342,7 +333,7 @@
     if((_displayFields & KTRegistrationFieldDisplayName) > 0) {
         
         // create and add the field
-        _displayNameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+        _displayNameField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, baseY, width, 40)
                                              andBorderColor:lightOrange
                                                    andGlows:TRUE];
         _displayNameField.delegate = self;
@@ -353,14 +344,14 @@
         [_scrollContainer addSubview:_displayNameField];
 
         // increment the yOffset so the next view is located properly
-        yOffset += 54.0f;
+        baseY += 54.0f;
     }
     
     // if the fields should display the phone number
     if((_displayFields & KTRegistrationFieldPhoneNumber) > 0) {
         
         // create and add the field
-        _phoneNumberField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+        _phoneNumberField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, baseY, width, 40)
                                              andBorderColor:lightOrange
                                                    andGlows:TRUE];
         _phoneNumberField.delegate = self;
@@ -371,11 +362,11 @@
         [_scrollContainer addSubview:_phoneNumberField];
 
         // increment the yOffset so the next view is located properly
-        yOffset += 54.0f;
+        baseY += 54.0f;
     }
     
     // create and add the password field
-    _passwordField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, yOffset, width, 40)
+    _passwordField = [KTTextField textFieldWithFrame:CGRectMake(xOffset, baseY, width, 40)
                                       andBorderColor:lightOrange
                                             andGlows:TRUE];
     _passwordField.delegate = self;
@@ -387,11 +378,11 @@
     [_scrollContainer addSubview:_passwordField];
 
     // increment the yOffset so the button is located properly
-    yOffset += 54.0;
+    baseY += 54.0;
     
     
     // create and add the registration button
-    _registerButton = [[KTButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, width, 45)
+    _registerButton = [[KTButton alloc] initWithFrame:CGRectMake(xOffset, baseY, width, 45)
                                     andGradientColors:lightOrange, darkOrange, nil];
     [_registerButton setTitle:@"Sign Up" forState:UIControlStateNormal];
     [_scrollContainer addSubview:_registerButton];
@@ -417,9 +408,6 @@
     
     if(self) {
         
-        // store the original y coordinate
-        _originalY = self.view.frame.origin.y;
-        
         // set our default display field(s) to login name (username) only
         _displayFields = KTRegistrationFieldLoginName;
         
@@ -427,7 +415,7 @@
         self.view.backgroundColor = [UIColor colorWithWhite:0.76470588235f alpha:1.0f];
         
         // this image is a light gradient that blends in with the background
-        _backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        _backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, ktIphone5Height)];
         _backgroundImage.image = [UIImage imageNamed:@"kt_login_bg"];
         _backgroundImage.contentMode = UIViewContentModeTopLeft;
         [self.view addSubview:_backgroundImage];

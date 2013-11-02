@@ -21,6 +21,7 @@
 
 #import "KTAlertToast.h"
 #import "KTAlertBar.h"
+#import "KTUtilities.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -101,8 +102,12 @@
                          
                          // if it's a bar, slide it in from the top of the screen
                          if(_type == KTAlertTypeBar) {
+                             
                              CGRect f = self.frame;
-                             f.origin.y = ([UIApplication sharedApplication].statusBarHidden) ? 0 : 20.0f;
+                             
+                             BOOL statusBarHidden = [UIApplication sharedApplication].statusBarHidden;
+                             f.origin.y = (statusBarHidden || [KTDevice isIOS7orLater]) ? 0.0f : ktStatusBarHeight;
+                             
                              self.frame = f;
                          }
                          

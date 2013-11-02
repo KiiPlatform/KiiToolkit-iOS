@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>UIImage(KTUtilities) Category Reference</title>
+		<title>KTDevice Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
@@ -16,7 +16,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">UIImage(KTUtilities) Category Reference</h1>
+				<h1 class="hideInXcode">KTDevice Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -41,7 +41,13 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/imageWithImage:scaledToSize:">&nbsp;&nbsp;&nbsp;&nbsp;+ imageWithImage:scaledToSize:</option>
+	<option value="//api/name/isFourInchIphone">&nbsp;&nbsp;&nbsp;&nbsp;+ isFourInchIphone</option>
+	
+	<option value="//api/name/isIOS7orLater">&nbsp;&nbsp;&nbsp;&nbsp;+ isIOS7orLater</option>
+	
+	<option value="//api/name/isIpad">&nbsp;&nbsp;&nbsp;&nbsp;+ isIpad</option>
+	
+	<option value="//api/name/isIphone">&nbsp;&nbsp;&nbsp;&nbsp;+ isIphone</option>
 	
 	
 	
@@ -71,7 +77,13 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/imageWithImage:scaledToSize:">imageWithImage:scaledToSize:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isFourInchIphone">isFourInchIphone</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isIOS7orLater">isIOS7orLater</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isIpad">isIpad</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isIphone">isIphone</a></span></li>
 	
 </ul></li>
 
@@ -82,7 +94,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="UIImage(KTUtilities) Category Reference" name="top"></a>
+				<a title="KTDevice Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -91,15 +103,18 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">UIImage(KTUtilities) Category Reference</h1>
+						<h1 class="title title-header">KTDevice Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">UIImage+KTUtilities.h<br />UIImage+KTUtilities.m</td>
+	<td class="specification-value">KTDevice.h<br />KTDevice.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -109,7 +124,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Utility methods for NSString to make commonly-needed functionality more efficient and reusable.</p>
+						<p>A set of definitions and convenience methods to make device management easier</p>
 					</div>
 					
 					
@@ -127,7 +142,25 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/imageWithImage:scaledToSize:">+&nbsp;imageWithImage:scaledToSize:</a></code>
+		<code><a href="#//api/name/isIOS7orLater">+&nbsp;isIOS7orLater</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isIphone">+&nbsp;isIphone</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isIpad">+&nbsp;isIpad</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isFourInchIphone">+&nbsp;isFourInchIphone</a></code>
 	</span>
 	
 	
@@ -147,41 +180,26 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/imageWithImage:scaledToSize:" title="imageWithImage:scaledToSize:"></a>
-	<h3 class="subsubtitle method-title">imageWithImage:scaledToSize:</h3>
+	<a name="//api/name/isFourInchIphone" title="isFourInchIphone"></a>
+	<h3 class="subsubtitle method-title">isFourInchIphone</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>A resize method for UIImage, this will use the &lsquo;scale-to-fill&rsquo; method of scaling. i.e. the image will be trimmed in order to completely fill the newSize.</p>
+		<p>Determines whether or not the device is an iPhone with a 4-inch screen</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (UIImage *)imageWithImage:(UIImage *)<em>image</em> scaledToSize:(CGSize)<em>newSize</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (BOOL)isFourInchIphone</code></div>
 
     
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>image</em></dt>
-			<dd><p>The original image which you&rsquo;d like to scale</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>newSize</em></dt>
-			<dd><p>The constrained size you&rsquo;d like the image scaled to</p></dd>
-		</dl>
-		
-	</div>
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>A UIImage object with the scaled image</p>
+		<p>TRUE if iPhone with 4-inch screen</p>
 	</div>
 	
 	
@@ -190,7 +208,9 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>A resize method for UIImage, this will use the &lsquo;scale-to-fill&rsquo; method of scaling. i.e. the image will be trimmed in order to completely fill the newSize.</p>
+		<p>Determines whether or not the device is an iPhone with a 4-inch screen</p>
+
+<p>This is useful for making UI adjustments based on device. The 4-inch screen is currently the iPhone 5 and above.</p>
 	</div>
 	
 	
@@ -201,7 +221,147 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">UIImage+KTUtilities.h</code><br />
+		<code class="declared-in-ref">KTDevice.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isIOS7orLater" title="isIOS7orLater"></a>
+	<h3 class="subsubtitle method-title">isIOS7orLater</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines whether or not the device is running iOS7 or later</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (BOOL)isIOS7orLater</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>TRUE if iOS7 or above</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines whether or not the device is running iOS7 or later</p>
+
+<p>Useful for knowing if adjustments are needed for iOS7</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTDevice.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isIpad" title="isIpad"></a>
+	<h3 class="subsubtitle method-title">isIpad</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines whether or not the device is an iPad</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (BOOL)isIpad</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>TRUE if iPad</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines whether or not the device is an iPad</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTDevice.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isIphone" title="isIphone"></a>
+	<h3 class="subsubtitle method-title">isIphone</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines whether or not the device is an iPhone or iPod Touch</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (BOOL)isIphone</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>TRUE if iPhone or iPod Touch</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines whether or not the device is an iPhone or iPod Touch</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KTDevice.h</code><br />
 	</div>				
 	
 	

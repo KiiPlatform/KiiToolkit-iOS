@@ -20,6 +20,7 @@
 #import "KTAlertBar.h"
 
 #import "UIColor+KTUtilities.h"
+#import "KTDevice.h"
 #import <QuartzCore/QuartzCore.h>
 
 // define some bar-specific variables
@@ -37,8 +38,22 @@
     self.layer.shadowRadius = 8.0f;
     self.layer.shadowOpacity = 1.0f;
     
+    // get the frame for our entire window
+    CGRect windowFrame = [[UIApplication sharedApplication] keyWindow].frame;
+    
+    CGFloat height = [KTDevice isIOS7orLater] ? KT_ALERTBAR_HEIGHT + ktStatusBarHeight : KT_ALERTBAR_HEIGHT;
+    
+    // construct the frame for our container
+    CGRect newViewFrame = self.frame;
+    newViewFrame.size.width = windowFrame.size.width;
+    newViewFrame.size.height = height;
+    newViewFrame.origin.y = -1 * height; // start the label out of the view for a nice animation
+    self.frame = newViewFrame;
+    
+    CGFloat labelY = [KTDevice isIOS7orLater] ? ktStatusBarHeight : 0;
+    
     // create a label with the message
-    UILabel *toastLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    UILabel *toastLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelY, newViewFrame.size.width, height-labelY)];
     toastLabel.text = self.message;
     toastLabel.textColor = KT_ALERTBAR_TEXT_COLOR;
     toastLabel.numberOfLines = 1;
@@ -47,23 +62,7 @@
     toastLabel.shadowOffset = CGSizeMake(0, -1);
     toastLabel.textAlignment = NSTextAlignmentCenter;
     toastLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-    
-    // get the frame for our entire window
-    CGRect windowFrame = [[UIApplication sharedApplication] keyWindow].frame;
-    
-    // construct the frame for our container
-    CGRect newViewFrame = self.frame;
-    newViewFrame.size.width = windowFrame.size.width;
-    newViewFrame.size.height = KT_ALERTBAR_HEIGHT;
-    newViewFrame.origin.y = -1 * KT_ALERTBAR_HEIGHT; // start the label out of the view for a nice animation
-    self.frame = newViewFrame;
-    
-    // adjust the label's frame to match its parent
-    CGRect newLabelFrame = toastLabel.frame;
-    newLabelFrame.size = CGSizeMake(self.frame.size.width, self.frame.size.height);
-    toastLabel.frame = newLabelFrame;
-    
-    // add the label to the container
+
     [self addSubview:toastLabel];
     
     

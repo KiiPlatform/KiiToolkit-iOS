@@ -24,4 +24,13 @@
  */
 @interface KTAlertBar : KTAlert
 
+/**
+ Set a custom background color (or gradient) for the alert bar
+ 
+ This will override the default red gradient background
+ 
+ @param color A nil-terminated list of UIColor objects for the background gradient. Can be any number of colors (0=clear, 1=solid color, N=gradient). The fill is from top to bottom
+ */
+- (void) setBackgroundColors:(UIColor*)color, ... NS_REQUIRES_NIL_TERMINATION;
+
 @end

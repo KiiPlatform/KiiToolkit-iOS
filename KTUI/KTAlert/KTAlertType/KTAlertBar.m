@@ -27,7 +27,40 @@
 #define KT_ALERTBAR_TEXT_COLOR      [UIColor whiteColor]
 #define KT_ALERTBAR_HEIGHT          36.0f
 
+@interface KTAlertBar() {
+    CAGradientLayer *_backgroundGradientLayer;
+    CALayer *_backgroundLayer;
+}
+
+@end
+
 @implementation KTAlertBar
+
+- (void) setBackgroundColors:(UIColor*)color, ...
+{
+    NSMutableArray *colors = [NSMutableArray array];
+
+    // set the new colors
+    va_list args;
+    va_start(args, color);
+    for (UIColor *arg = color; arg != nil; arg = va_arg(args, UIColor*))
+    {
+        [colors addObject:(id)arg.CGColor];
+    }
+    va_end(args);
+    
+    if(colors.count > 1) {
+        _backgroundGradientLayer.colors = [NSArray arrayWithArray:colors];
+        _backgroundLayer.backgroundColor = [UIColor clearColor].CGColor;
+    } else if(colors.count == 1) {
+        _backgroundGradientLayer.colors = nil;
+        _backgroundLayer.backgroundColor = (__bridge CGColorRef)[colors lastObject];
+    } else {
+        _backgroundGradientLayer.colors = nil;
+        _backgroundLayer.backgroundColor = [UIColor clearColor].CGColor;
+    }
+
+}
 
 - (void) configure
 {
@@ -70,11 +103,15 @@
     UIColor *darkRed = [UIColor colorWithHex:@"aa1d1d"];
     UIColor *lightRed = [UIColor colorWithHex:@"d51a1a"];
     
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)lightRed.CGColor, (id)darkRed.CGColor, nil];
-    [self.layer insertSublayer:gradient atIndex:0];
+    _backgroundLayer = [CAGradientLayer layer];
+    _backgroundLayer.frame = self.bounds;
+    _backgroundLayer.backgroundColor = darkRed.CGColor;
+    [self.layer insertSublayer:_backgroundLayer atIndex:0];
     
+    _backgroundGradientLayer = [CAGradientLayer layer];
+    _backgroundGradientLayer.frame = self.bounds;
+    _backgroundGradientLayer.colors = [NSArray arrayWithObjects:(id)lightRed.CGColor, (id)darkRed.CGColor, nil];
+    [self.layer insertSublayer:_backgroundGradientLayer atIndex:0];
 }
 
 @end

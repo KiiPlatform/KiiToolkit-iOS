@@ -24,6 +24,7 @@
 
 #import "KTLoader.h"
 #import "KTAlert.h"
+#import "KTAlertBar.h"
 #import "KTButton.h"
 #import "KTTextField.h"
 #import "KTImageView.h"

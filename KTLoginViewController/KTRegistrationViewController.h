@@ -37,7 +37,7 @@ enum {
 };
 typedef NSUInteger KTRegistrationFields;
 
-@class KTTextField, KTButton;
+@class KTTextField, KTButton, KTLoginViewController;
 
 /**
  Created and called by the KTLoginViewController, this view handles all the logic and UI for registering a user. As with the other view controllers, this view can be customized fully - including which text fields are displayed to the user. To access this view easily from your application's class, do something like:
@@ -54,6 +54,9 @@ typedef NSUInteger KTRegistrationFields;
  
  */
 @interface KTRegistrationViewController : UIViewController <UITextFieldDelegate>
+
+/** The associated KTLoginViewController */
+@property (nonatomic, strong) KTLoginViewController *loginViewController;
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;

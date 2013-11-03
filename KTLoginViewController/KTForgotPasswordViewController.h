@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class KTTextField, KTButton;
+@class KTTextField, KTButton, KTLoginViewController;
 
 /**
  Created and called by the KTLoginViewController, this view handles all the logic and UI for resetting a forgotten password. As with the other view controllers, this view can be customized fully. To access this view easily from your application's class, do something like:
@@ -36,6 +36,9 @@
  
  */
 @interface KTForgotPasswordViewController : UIViewController <UITextFieldDelegate>
+
+/** The associated KTLoginViewController */
+@property (nonatomic, strong) KTLoginViewController *loginViewController;
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;

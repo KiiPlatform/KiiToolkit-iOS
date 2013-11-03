@@ -23,6 +23,7 @@
 
 #import "KTRegistrationViewController.h"
 #import "KTForgotPasswordViewController.h"
+#import "KTLoginViewController.h"
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
 #import <Accounts/Accounts.h>
@@ -46,14 +47,13 @@
     // registration was successful
     if(error == nil) {
         
-        [[NSUserDefaults standardUserDefaults] setObject:user.accessToken forKey:@"kii-token"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        // show success
-        [KTLoader showLoader:@"Registered!"
-                    animated:TRUE
-               withIndicator:KTLoaderIndicatorSuccess
-             andHideInterval:KTLoaderDurationAuto];
+        if(_loginViewController.shouldHandleDialogs) {
+            // show success
+            [KTLoader showLoader:@"Registered!"
+                        animated:TRUE
+                   withIndicator:KTLoaderIndicatorSuccess
+                 andHideInterval:KTLoaderDurationAuto];
+        }
         
         // hide this view
         [self dismissViewControllerAnimated:TRUE completion:nil];
@@ -62,31 +62,41 @@
     // registration failed
     else {
         
-        // build a short message for the user
-        NSString *subMessage = @"ensure all fields are filled out";
-        switch (error.code) {
-            case 304: subMessage = @"invalid password format"; break;
-            case 305: subMessage = @"invalid email format"; break;
-            case 307: subMessage = @"invalid username format"; break;
-            case 308: subMessage = @"invalid phone number format"; break;
-            case 310: subMessage = @"invalid display name format"; break;
-            case 503: subMessage = @"user already exists"; break;
-            default: break;
-        }
-        
-        NSString *message = [NSString stringWithFormat:@"Error: %@", subMessage];
-        
-        // tell the user
-        [KTAlert showAlert:KTAlertTypeBar
-               withMessage:message
-               andDuration:KTAlertDurationLong];
-        
         // tell the console with a more descriptive description
         NSLog(@"Error creating object: %@", error.description);
-        
-        // hide the loading UI element
-        [KTLoader hideLoader:TRUE];
+
+        if(_loginViewController.shouldHandleDialogs) {
+            
+            // build a short message for the user
+            NSString *subMessage = @"ensure all fields are filled out";
+            switch (error.code) {
+                case 304: subMessage = @"invalid password format"; break;
+                case 305: subMessage = @"invalid email format"; break;
+                case 307: subMessage = @"invalid username format"; break;
+                case 308: subMessage = @"invalid phone number format"; break;
+                case 310: subMessage = @"invalid display name format"; break;
+                case 503: subMessage = @"user already exists"; break;
+                default: break;
+            }
+            
+            NSString *message = [NSString stringWithFormat:@"Error: %@", subMessage];
+            
+            // tell the user
+            [KTAlert showAlert:KTAlertTypeBar
+                   withMessage:message
+                   andDuration:KTAlertDurationLong];
+            
+            // hide the loading UI element
+            [KTLoader hideLoader:TRUE];
+        }
     }
+    
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [self.loginViewController.delegate didFinishRegistering:user withError:error];
+    } @catch (NSException *exception) { }
+
+
 }
 
 
@@ -106,6 +116,12 @@
 
 - (void) performRegistration:(id)sender
 {
+    
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [self.loginViewController.delegate didStartRegistering];
+    } @catch (NSException *exception) { }
+
     
     // hide the keyboard and shift the view (if needed)
     [self tappedView];
@@ -159,8 +175,10 @@
     // assume we have a user created
     if(user != nil) {
 
-        // show a loading screen to the user
-        [KTLoader showLoader:@"Registering user..." animated:TRUE];
+        if(_loginViewController.shouldHandleDialogs) {
+            // show a loading screen to the user
+            [KTLoader showLoader:@"Registering user..." animated:TRUE];
+        }
         
         // perform the registration asynchronously
         [user performRegistrationWithBlock:^(KiiUser *user, NSError *error) {
@@ -170,14 +188,16 @@
     
     // otherwise, there was an error creating the object
     else {
-                
-        // tell the user
-        [KTAlert showAlert:KTAlertTypeBar
-               withMessage:@"Error: ensure all fields are filled out"
-               andDuration:KTAlertDurationLong];
         
         // tell the console
         NSLog(@"Error creating object: user was nil");
+        
+        if(_loginViewController.shouldHandleDialogs) {
+            // tell the user
+            [KTAlert showAlert:KTAlertTypeBar
+                   withMessage:@"Error: ensure all fields are filled out"
+                   andDuration:KTAlertDurationLong];
+        }
 
     }
     
@@ -416,7 +436,14 @@
 
 - (void) authenticateWithFacebook
 {
-    [KTLoader showLoader:@"Registering..."];
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [self.loginViewController.delegate didStartRegistering];
+    } @catch (NSException *exception) { }
+    
+    if(_loginViewController.shouldHandleDialogs) {
+        [KTLoader showLoader:@"Registering..."];
+    }
     
     [KiiSocialConnect logIn:kiiSCNFacebook
                usingOptions:nil
@@ -426,9 +453,18 @@
 
 - (void) authenticateWithTwitter
 {
-    if (NSClassFromString(@"ACAccountStore")) {
-        
+    
+    if(_loginViewController.shouldHandleDialogs) {
         [KTLoader showLoader:@"Registering..."];
+    }
+
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [self.loginViewController.delegate didStartRegistering];
+    } @catch (NSException *exception) { }
+    
+
+    if (NSClassFromString(@"ACAccountStore")) {
         
         ACAccountStore *store = [[ACAccountStore alloc] init];
         ACAccountType *twitterType = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];

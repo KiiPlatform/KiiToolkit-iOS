@@ -22,6 +22,7 @@
 #if __has_include(<KiiSDK/Kii.h>)
 
 #import "KiiToolkit.h"
+#import "KTLoginViewController.h"
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -38,8 +39,15 @@
     // hide the keyboard (if needed)
     [_userIdentifierField resignFirstResponder];
     
-    // show a loading screen to the user
-    [KTLoader showLoader:@"Resetting password..." animated:TRUE];
+    if(_loginViewController.shouldHandleDialogs) {
+        // show a loading screen to the user
+        [KTLoader showLoader:@"Resetting password..." animated:TRUE];
+    }
+
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [self.loginViewController.delegate didStartResettingPassword];
+    } @catch (NSException *exception) { }
 
     // perform the asynchronous action
     [KiiUser resetPassword:userIdentifier
@@ -48,11 +56,13 @@
                      // reset was successful
                      if(error == nil) {
                          
-                         // show the user
-                         [KTLoader showLoader:@"Password reset sent!"
-                                     animated:TRUE
-                                withIndicator:KTLoaderIndicatorSuccess
-                              andHideInterval:KTLoaderDurationAuto];
+                         if(_loginViewController.shouldHandleDialogs) {
+                             // show the user
+                             [KTLoader showLoader:@"Password reset sent!"
+                                         animated:TRUE
+                                    withIndicator:KTLoaderIndicatorSuccess
+                                  andHideInterval:KTLoaderDurationAuto];
+                         }
                          
                          // and hide this view
                          [self dismissViewControllerAnimated:TRUE completion:nil];
@@ -61,18 +71,25 @@
                      // reset failed
                      else {
                          
-                         // tell the user
-                         [KTAlert showAlert:KTAlertTypeBar
-                                withMessage:@"Error: unable to reset password"
-                                andDuration:KTAlertDurationLong];
-                         
                          // tell the console with a descriptive message
-                         NSLog(@"Error creating object: %@", error.description);
-                         
-                         // the action is complete, hide the loading view
-                         [KTLoader hideLoader:TRUE];
+                         NSLog(@"Error resetting password: %@", error.description);
+
+                         if(_loginViewController.shouldHandleDialogs) {
+                             // tell the user
+                             [KTAlert showAlert:KTAlertTypeBar
+                                    withMessage:@"Error: unable to reset password"
+                                    andDuration:KTAlertDurationLong];
+                             
+                             // the action is complete, hide the loading view
+                             [KTLoader hideLoader:TRUE];
+                         }
 
                      }
+                     
+                     // call the delegate method if the receiver is prepared for it
+                     @try {
+                         [self.loginViewController.delegate didFinishResettingPassword:error];
+                     } @catch (NSException *exception) { }
                      
                  }];
 

@@ -22,8 +22,62 @@
 #import "KTRegistrationViewController.h"
 #import "KTForgotPasswordViewController.h"
 
-@class KTTextField, KTButton;
+@class KTTextField, KTButton, KiiUser;
 @class KTRegistrationViewController, KTForgotPasswordViewController;
+
+/**
+ Implement the delegate methods to be notified of changes in the status
+ */
+@protocol KTLoginViewDelegate <NSObject>
+@optional
+
+/**
+ Called when the user is starting to authenticate
+ */
+- (void) didStartAuthenticating;
+
+/**
+ Called when the user is starting to register
+ */
+- (void) didStartRegistering;
+
+/**
+ Called when the user is starting to reset their password
+ */
+- (void) didStartResettingPassword;
+
+/**
+ Called when the authentication call has completed
+ 
+ Be sure to test the error to determine success. This method is called on success or failure
+ 
+ @param user If successful, this will contain the KiiUser object
+ @param error If nil, the authentication was successful. Otherwise, something went wrong - check the error to find out what
+ */
+- (void) didFinishAuthenticating:(KiiUser*)user withError:(NSError*)error;
+
+/**
+ Called when the registration call has completed
+ 
+ Be sure to test the error to determine success. This method is called on success or failure
+ 
+ @param user If successful, this will contain the KiiUser object
+ @param error If nil, the registration was successful. Otherwise, something went wrong - check the error to find out what
+ */
+- (void) didFinishRegistering:(KiiUser*)user withError:(NSError*)error;
+
+/**
+ Called when the password reset call has completed
+ 
+ Be sure to test the error to determine success. This method is called on success or failure
+ 
+ @param error If nil, the reset was successful. Otherwise, something went wrong - check the error to find out what
+ */
+- (void) didFinishResettingPassword:(NSError*)error;
+
+@end
+
+
 
 /**
  This class is a ViewController which allows you to create a full user authentication experience with only 2 lines of code: initialization and showing the view controller:
@@ -39,6 +93,9 @@
 
  */
 @interface KTLoginViewController : UIViewController <UITextFieldDelegate>
+
+/** The delegate for the entire login flow */
+@property (nonatomic, strong) id<KTLoginViewDelegate> delegate;
 
 /** The title image (defaults to Kii logo) */
 @property (nonatomic, strong) UIImageView *titleImage;
@@ -72,6 +129,9 @@
 
 /** The forgot password view controller as a property, in order to customize it from a single access point after the KTLoginViewController is initiated */
 @property (nonatomic, strong) KTForgotPasswordViewController *forgotPasswordView;
+
+/** Indicate whether or not the KTLoginView and its associated views should handle loading/success/error dialogs. Default is TRUE */
+@property (nonatomic, assign) BOOL shouldHandleDialogs;
 
 /**
  This method will add a Facebook authentication button to your LoginViewController and RegistrationViewController

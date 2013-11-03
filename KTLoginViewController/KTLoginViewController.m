@@ -41,13 +41,12 @@
     // authentication was successful
     if(error == nil) {
         
-        [[NSUserDefaults standardUserDefaults] setObject:user.accessToken forKey:@"kii-token"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [KTLoader showLoader:@"Logged In!"
-                    animated:TRUE
-               withIndicator:KTLoaderIndicatorSuccess
-             andHideInterval:KTLoaderDurationAuto];
+        if(_shouldHandleDialogs) {
+            [KTLoader showLoader:@"Logged In!"
+                        animated:TRUE
+                   withIndicator:KTLoaderIndicatorSuccess
+                 andHideInterval:KTLoaderDurationAuto];
+        }
         
         // hide this view and go back to the app
         [self dismissViewControllerAnimated:TRUE completion:nil];
@@ -56,24 +55,37 @@
     // authentication failed
     else {
         
-        // tell the user
-        [KTAlert showAlert:KTAlertTypeBar
-               withMessage:@"Unable to log in - verify your credentials"
-               andDuration:KTAlertDurationLong];
-        
         // tell the console with a more descriptive error
         NSLog(@"Error authenticating: %@", error.description);
         
-        // the authentication is complete, hide the loading view
-        [KTLoader hideLoader:TRUE];
+        if(_shouldHandleDialogs) {
+            // tell the user
+            [KTAlert showAlert:KTAlertTypeBar
+                   withMessage:@"Unable to log in - verify your credentials"
+                   andDuration:KTAlertDurationLong];
+            
+            // the authentication is complete, hide the loading view
+            [KTLoader hideLoader:TRUE];
+        }
+
     }
 
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [_delegate didFinishAuthenticating:user withError:error];
+    } @catch (NSException *exception) { }
+    
 }
 
 #pragma mark - Action methods
 
 - (void) performAuthentication:(id)sender
 {
+    
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [_delegate didStartAuthenticating];
+    } @catch (NSException *exception) { }
 
     // hide the keyboard and re-frame the view
     [self tappedView];
@@ -82,8 +94,10 @@
     NSString *userIdentifier = [_usernameField text];
     NSString *password = [_passwordField text];
 
-    // show a loading screen to the user
-    [KTLoader showLoader:@"Logging in..." animated:TRUE];
+    if(_shouldHandleDialogs) {
+        // show a loading screen to the user
+        [KTLoader showLoader:@"Logging in..." animated:TRUE];
+    }
     
     // perform the asynchronous authentication
     [KiiUser authenticate:userIdentifier
@@ -170,7 +184,15 @@
 
 - (void) authenticateWithFacebook
 {
-    [KTLoader showLoader:@"Logging in..."];
+    
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [_delegate didStartAuthenticating];
+    } @catch (NSException *exception) { }
+
+    if(_shouldHandleDialogs) {
+        [KTLoader showLoader:@"Logging in..."];
+    }
 
     [KiiSocialConnect logIn:kiiSCNFacebook
                usingOptions:nil
@@ -180,9 +202,17 @@
 
 - (void) authenticateWithTwitter
 {
+    
+    // call the delegate method if the receiver is prepared for it
+    @try {
+        [_delegate didStartAuthenticating];
+    } @catch (NSException *exception) { }
+
     if (NSClassFromString(@"ACAccountStore")) {
         
-        [KTLoader showLoader:@"Logging in..."];
+        if(_shouldHandleDialogs) {
+            [KTLoader showLoader:@"Logging in..."];
+        }
         
         ACAccountStore *store = [[ACAccountStore alloc] init];
         ACAccountType *twitterType = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -362,11 +392,16 @@
     
     if(self) {
         
+        _shouldHandleDialogs = TRUE;
+        
         CGFloat baseY = [KTDevice isIOS7orLater] ? ktStatusBarHeight : 0;
         
         // initialize the registration + forgot password views for access
         _registrationView = [[KTRegistrationViewController alloc] init];
+        _registrationView.loginViewController = self;
+        
         _forgotPasswordView = [[KTForgotPasswordViewController alloc] init];
+        _forgotPasswordView.loginViewController = self;
         
         // and set our default background color (matched to background image)
         self.view.backgroundColor = [UIColor colorWithWhite:0.76470588235f alpha:1.0f];

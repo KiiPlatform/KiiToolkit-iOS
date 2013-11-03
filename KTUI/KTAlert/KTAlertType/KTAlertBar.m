@@ -74,7 +74,8 @@
     // get the frame for our entire window
     CGRect windowFrame = [[UIApplication sharedApplication] keyWindow].frame;
     
-    CGFloat height = [KTDevice isIOS7orLater] ? KT_ALERTBAR_HEIGHT + ktStatusBarHeight : KT_ALERTBAR_HEIGHT;
+    BOOL iOS7Shift = ![UIApplication sharedApplication].statusBarHidden && [KTDevice isIOS7orLater];
+    CGFloat height = iOS7Shift ? KT_ALERTBAR_HEIGHT + ktStatusBarHeight : KT_ALERTBAR_HEIGHT;
     
     // construct the frame for our container
     CGRect newViewFrame = self.frame;
@@ -83,7 +84,7 @@
     newViewFrame.origin.y = -1 * height; // start the label out of the view for a nice animation
     self.frame = newViewFrame;
     
-    CGFloat labelY = [KTDevice isIOS7orLater] ? ktStatusBarHeight : 0;
+    CGFloat labelY = iOS7Shift ? ktStatusBarHeight : 0;
     
     // create a label with the message
     UILabel *toastLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelY, newViewFrame.size.width, height-labelY)];

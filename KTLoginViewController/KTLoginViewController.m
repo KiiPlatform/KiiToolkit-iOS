@@ -23,9 +23,11 @@
 
 #import <KiiSDK/Kii.h>
 #import <QuartzCore/QuartzCore.h>
+#import <Accounts/Accounts.h>
 
 @interface KTLoginViewController () {
-//    CGFloat _originalY;
+    KTButton *_facebookButton;
+    KTButton *_twitterButton;
 }
 
 - (void) shiftView:(UITextField*)textField;
@@ -33,6 +35,40 @@
 @end
 
 @implementation KTLoginViewController
+
+- (void) authComplete:(KiiUser*)user withError:(NSError*)error
+{
+    // authentication was successful
+    if(error == nil) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:user.accessToken forKey:@"kii-token"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [KTLoader showLoader:@"Logged In!"
+                    animated:TRUE
+               withIndicator:KTLoaderIndicatorSuccess
+             andHideInterval:KTLoaderDurationAuto];
+        
+        // hide this view and go back to the app
+        [self dismissViewControllerAnimated:TRUE completion:nil];
+    }
+    
+    // authentication failed
+    else {
+        
+        // tell the user
+        [KTAlert showAlert:KTAlertTypeBar
+               withMessage:@"Unable to log in - verify your credentials"
+               andDuration:KTAlertDurationLong];
+        
+        // tell the console with a more descriptive error
+        NSLog(@"Error authenticating: %@", error.description);
+        
+        // the authentication is complete, hide the loading view
+        [KTLoader hideLoader:TRUE];
+    }
+
+}
 
 #pragma mark - Action methods
 
@@ -53,37 +89,7 @@
     [KiiUser authenticate:userIdentifier
              withPassword:password
                  andBlock:^(KiiUser *user, NSError *error) {
-                     
-                     // authentication was successful
-                     if(error == nil) {
-                         
-                         [[NSUserDefaults standardUserDefaults] setObject:user.accessToken forKey:@"kii-token"];
-                         [[NSUserDefaults standardUserDefaults] synchronize];
-
-                         [KTLoader showLoader:@"Logged In!"
-                                     animated:TRUE
-                                withIndicator:KTLoaderIndicatorSuccess
-                              andHideInterval:KTLoaderDurationAuto];
-
-                         // hide this view and go back to the app
-                         [self dismissViewControllerAnimated:TRUE completion:nil];
-                     }
-                     
-                     // authentication failed
-                     else {
-
-                         // tell the user
-                         [KTAlert showAlert:KTAlertTypeBar
-                                withMessage:@"Unable to log in - verify your credentials"
-                                andDuration:KTAlertDurationLong];
-                         
-                         // tell the console with a more descriptive error
-                         NSLog(@"Error creating object: %@", error.description);
-                         
-                         // the authentication is complete, hide the loading view
-                         [KTLoader hideLoader:TRUE];
-                     }
-                     
+                     [self authComplete:user withError:error];
                  }];
     
 }
@@ -137,9 +143,7 @@
         
         // the view would be hidden or not in acceptable range, we need to slide the view
         if(offset > maximum) {
-            
             transform = CGAffineTransformMakeTranslation(0, maximum - offset);
-            
         }
         
     }
@@ -154,6 +158,198 @@
                      animations:^{
                          self.view.transform = transform;
                      }];
+    
+}
+
+#pragma mark - Social Integration Methods
+- (void) socialAuthenticationFinished:(KiiUser*)user
+                         usingNetwork:(KiiSocialNetworkName)network
+                            withError:(NSError*)error {
+    [self authComplete:user withError:error];
+}
+
+- (void) authenticateWithFacebook
+{
+    [KTLoader showLoader:@"Logging in..."];
+
+    [KiiSocialConnect logIn:kiiSCNFacebook
+               usingOptions:nil
+               withDelegate:self
+                andCallback:@selector(socialAuthenticationFinished:usingNetwork:withError:)];
+}
+
+- (void) authenticateWithTwitter
+{
+    if (NSClassFromString(@"ACAccountStore")) {
+        
+        [KTLoader showLoader:@"Logging in..."];
+        
+        ACAccountStore *store = [[ACAccountStore alloc] init];
+        ACAccountType *twitterType = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        
+        // This will show a dialog asking the user to grant
+        // the access to his/her Twitter accounts.
+        [store requestAccessToAccountsWithType:twitterType
+                                       options:nil
+                                    completion:^(BOOL granted, NSError *error) {
+                                        
+                                        if (granted) {
+                                            
+                                            ACAccountType *twitterTypeGranted = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+                                            
+                                            // Return an array of granted ACAccounts.
+                                            NSArray *twitterAccounts = [store accountsWithAccountType:twitterTypeGranted];
+                                            
+                                            // In this snippet, we use the first account
+                                            // obtained with ACAccountStore.
+                                            ACAccount* account = twitterAccounts[0];
+                                            
+                                            // Fetch the OAuth token and secret.
+                                            NSDictionary *options = @{@"twitter_account": account};
+                                            
+                                            // Execute the login.
+                                            [KiiSocialConnect logIn:kiiSCNTwitter
+                                                       usingOptions:options
+                                                       withDelegate:self
+                                                        andCallback:@selector(socialAuthenticationFinished:usingNetwork:withError:)];
+                                            
+                                            
+                                        } else {
+                                            [self authComplete:nil withError:error];
+                                        }
+                                    }];
+    } else {
+        [self authComplete:nil withError:[NSError errorWithDomain:@"com.kii.error" code:1 userInfo:@{@"reason": @"ACAccountStore doesn't exist"}]];
+    }
+}
+
+- (void) useFacebookAuthenticationOption
+{
+    // ensure our app is set up properly
+    BOOL handlesURL = [[UIApplication sharedApplication].delegate respondsToSelector:@selector(application:openURL:sourceApplication:annotation:)];
+    
+    
+    // BEWARE!!!
+    // if this assertion is failing... be sure you have added the callback
+    // application:openURL:sourceApplication:annotation: to your app delegate!!
+    // See instructions here:
+    // http://documentation.kii.com/en/guides/ios/managing-users/social-network-integration/facebook-integration/
+    assert(handlesURL);
+    
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSArray *values = [mainBundle objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+    
+    assert(values.count > 0);
+    
+    NSString *facebookAppID = nil;
+    
+    for(NSDictionary *d in values) {
+        
+        NSArray *urls = [d objectForKey:@"CFBundleURLSchemes"];
+        
+        if(urls != nil) {
+            for(NSString *url in urls) {
+                if([[url substringToIndex:2] isEqualToString:@"fb"]) {
+                    facebookAppID = [url substringFromIndex:2];
+                }
+            }
+        }
+        
+    }
+    
+    // BEWARE!!!
+    // if this assertion is failing... be sure you have added your facebook
+    // app id to your plist file!! See instructions here:
+    // http://documentation.kii.com/en/guides/ios/managing-users/social-network-integration/facebook-integration/
+    assert(facebookAppID != nil);
+        
+    // initialize the connector
+    [KiiSocialConnect setupNetwork:kiiSCNFacebook
+                           withKey:facebookAppID
+                         andSecret:nil
+                        andOptions:nil];
+    
+    // add the facebook button
+    
+    // figure out its frame
+    CGFloat x = _loginButton.frame.origin.x;
+    CGFloat y = _loginButton.frame.origin.y+_loginButton.frame.size.height + 10;
+    CGFloat width = (_twitterButton != nil) ? _loginButton.frame.size.width/2 - 10 : _loginButton.frame.size.width;
+    CGFloat height = _loginButton.frame.size.height - 10;
+    
+    _facebookButton = [[KTButton alloc] initWithFrame:CGRectMake(x, y, width, height)
+                                    andGradientColors:[UIColor colorWithHex:@"6e8ccc"], [UIColor colorWithHex:@"3b5998"], nil];
+    _facebookButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    [_facebookButton setTitle:@"Use Facebook" forState:UIControlStateNormal];
+    [_facebookButton addTarget:self action:@selector(authenticateWithFacebook) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_facebookButton];
+    
+    // resize twitter button [if needed]
+    if(_twitterButton != nil) {
+        CGRect twFrame = _twitterButton.frame;
+        twFrame.size.width = _loginButton.frame.size.width/2 - 10;
+        twFrame.origin.x = self.view.frame.size.width/2 + 10;
+        _twitterButton.frame = twFrame;
+    }
+    
+    // shift the other buttons down
+    CGRect frame = _noAccountLabel.frame;
+    frame.origin.y = _facebookButton.frame.origin.y + _facebookButton.frame.size.height + 30;
+    _noAccountLabel.frame = frame;
+    
+    // shift the other buttons down
+    frame = _registerButton.frame;
+    frame.origin.y = _noAccountLabel.frame.origin.y + _noAccountLabel.frame.size.height + 5;
+    _registerButton.frame = frame;
+    
+    // add it to the registration view
+    [_registrationView useFacebookRegistrationOption];
+    
+}
+
+- (void) useTwitterAuthenticationOption:(NSString*)twitterKey
+                              andSecret:(NSString*)twitterSecret
+{
+    // initialize the connector
+    [KiiSocialConnect setupNetwork:kiiSCNTwitter
+                           withKey:twitterKey
+                         andSecret:twitterSecret
+                        andOptions:nil];
+    
+    // add the twitter button
+    
+    // figure out its frame
+    CGFloat x = (_facebookButton != nil) ? self.view.frame.size.width/2 + 10 : _loginButton.frame.origin.x;
+    CGFloat y = _loginButton.frame.origin.y+_loginButton.frame.size.height + 10;
+    CGFloat width = (_facebookButton != nil) ? _loginButton.frame.size.width/2 - 10 : _loginButton.frame.size.width;
+    CGFloat height = _loginButton.frame.size.height - 10;
+    
+    _twitterButton = [[KTButton alloc] initWithFrame:CGRectMake(x, y, width, height)
+                                   andGradientColors:[UIColor colorWithHex:@"00aced"], [UIColor colorWithHex:@"0084b4"], nil];
+    _twitterButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    [_twitterButton setTitle:@"Use Twitter" forState:UIControlStateNormal];
+    [_twitterButton addTarget:self action:@selector(authenticateWithTwitter) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_twitterButton];
+    
+    // resize facebook button [if needed]
+    if(_facebookButton != nil) {
+        CGRect fbFrame = _facebookButton.frame;
+        fbFrame.size.width = _loginButton.frame.size.width/2 - 10;
+        _facebookButton.frame = fbFrame;
+    }
+    
+    // shift the other buttons down
+    CGRect frame = _noAccountLabel.frame;
+    frame.origin.y = _twitterButton.frame.origin.y + _twitterButton.frame.size.height + 30;
+    _noAccountLabel.frame = frame;
+    
+    frame = _registerButton.frame;
+    frame.origin.y = _noAccountLabel.frame.origin.y + _noAccountLabel.frame.size.height + 5;
+    _registerButton.frame = frame;
+    
+    // add it to the registration view
+    [_registrationView useTwitterRegistrationOption:twitterKey
+                                          andSecret:twitterSecret];
     
 }
 
@@ -304,9 +500,7 @@
         
         // if they are, hide this view
         [self dismissViewControllerAnimated:TRUE completion:nil];
-        
     }
-    
 }
 
 

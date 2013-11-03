@@ -88,4 +88,27 @@ typedef NSUInteger KTRegistrationFields;
  */
 @property (nonatomic, assign) NSUInteger displayFields;
 
+
+/**
+ This method will add a Facebook authentication button to your RegistrationViewController
+ 
+ Simply call this method if you wish to use Facebook registration within your app. If you wish to allow authentication with Facebook (i.e. log in), then call the method useFacebookAuthenticationOption on the KTLoginViewController
+ 
+ > Note: There is some setup required to utilize Facebook. See instructions [here](http://documentation.kii.com/en/guides/ios/managing-users/social-network-integration/facebook-integration/)
+ */
+- (void) useFacebookRegistrationOption;
+
+/**
+ This method will add a Twitter authentication button to your RegistrationViewController
+ 
+ Simply call this method if you wish to use Twitter registration within your app. If you wish to allow authentication with Twitter (i.e. log in), then call the method useTwitterAuthenticationOption on the KTLoginViewController
+ 
+ > Note: There is some setup required to utilize Twitter. See instructions [here](http://documentation.kii.com/en/guides/ios/managing-users/social-network-integration/twitter-integration/)
+ 
+ @param twitterKey Your app's Twitter Consumer Key
+ @param twitterSecret Your app's Twitter Consumer Secret
+ */
+- (void) useTwitterRegistrationOption:(NSString*)twitterKey
+                            andSecret:(NSString*)twitterSecret;
+
 @end

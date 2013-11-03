@@ -73,4 +73,27 @@
 /** The forgot password view controller as a property, in order to customize it from a single access point after the KTLoginViewController is initiated */
 @property (nonatomic, strong) KTForgotPasswordViewController *forgotPasswordView;
 
+/**
+ This method will add a Facebook authentication button to your LoginViewController and RegistrationViewController
+ 
+ Simply call this method if you wish to use Facebook authentication within your app. 
+ 
+ > Note: There is some setup required to utilize Facebook. See instructions [here](
+ > http://documentation.kii.com/en/guides/ios/managing-users/social-network-integration/facebook-integration/)
+ */
+- (void) useFacebookAuthenticationOption;
+
+/**
+ This method will add a Twitter authentication button to your LoginViewController and RegistrationViewController
+ 
+ Simply call this method if you wish to use Twitter authentication within your app.
+ 
+ > Note: There is some setup required to utilize Twitter. See instructions [here](http://documentation.kii.com/en/guides/ios/managing-users/social-network-integration/twitter-integration/)
+ 
+ @param twitterKey Your app's Twitter Consumer Key
+ @param twitterSecret Your app's Twitter Consumer Secret
+ */
+- (void) useTwitterAuthenticationOption:(NSString*)twitterKey
+                              andSecret:(NSString*)twitterSecret;
+
 @end

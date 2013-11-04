@@ -25,6 +25,7 @@
 {
     NSString *retString = @"";
     double changeSeconds = [[NSDate date] timeIntervalSinceDate:self];
+    int changeSecondInt = (int) changeSeconds;
     int changeMinutes = floor(changeSeconds / 60);
     int changeHours = floor(changeMinutes / 60);
     int changeDays = floor(changeHours / 24);
@@ -32,8 +33,10 @@
     int changeMonths = floor(changeWeeks / 4);
     int changeYears = floor(changeMonths / 12);
     
-    if(changeSeconds < 60) {
+    if(changeSeconds < 5) {
         retString = @"Just Now";
+    } else if(changeSeconds < 60) {
+        retString = [NSString stringWithFormat:@"%d%@%@ ago", changeSecondInt, (shortened?@"s":@" second"), (changeSecondInt==1||shortened)?@"":@"s"];
     } else if(changeMinutes < 60) {
         retString = [NSString stringWithFormat:@"%d%@%@ ago", changeMinutes, (shortened?@"m":@" minute"), (changeMinutes==1||shortened)?@"":@"s"];
     } else if(changeHours < 24) {
